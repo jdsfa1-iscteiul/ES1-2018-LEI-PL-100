@@ -11,7 +11,7 @@ import com.restfb.types.Group;
 import com.restfb.types.Post;
 import com.restfb.types.User;
 
-public class FacebookClientApp {
+public class Main {
 
 
 
@@ -26,7 +26,7 @@ public class FacebookClientApp {
 		FacebookClient fb = new DefaultFacebookClient(at);
 
 		User me = fb.fetchObject("me", User.class);
-		System.out.println("Utilizador: \n" + me.getName() +"\n\n");
+		System.out.println("Utilizador: \n" + me.getName() +"\n");
 
 
 		Connection<Group> groups = fb.fetchConnection("me/groups", Group.class);
@@ -35,7 +35,7 @@ public class FacebookClientApp {
 			for(Group g: groupPages) {
 				if (g.getName().equals("TURMA LEI PL")) {
 					idGrupoIscte = g.getId();
-					System.out.println("Grupo: " + g.getName() + "\n\n");
+					System.out.println("Grupo: " + g.getName() + "\n");
 				}
 			}
 		}
@@ -47,7 +47,7 @@ public class FacebookClientApp {
 			for(Post post: postPages) {
 				System.out.println(post.getMessage());
 				System.out.println(post.getUpdatedTime());
-				System.out.println("fb.com/"+ post.getId()+"\n\n");
+				System.out.println("fb.com/"+ post.getId()+"\n");
 			}
 
 	}
