@@ -16,23 +16,23 @@
             <Button fx:id="home_button" layoutX="67.0" layoutY="96.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="117.0" text="Home" />
             <ImageView fitHeight="158.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="file:/C:/Users/jonic/OneDrive%20-%20ISCTE-IUL/FACULDADE/ANO_03_SEMESTRE_1/ES/ISCTEIULNormasLogos-02.png" />
+                  <Image url="file:../Projeto/src/images/ISCTEIULNormasLogos-02.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="41.0" fitWidth="49.0" layoutX="80.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="file:/C:/Users/jonic/OneDrive%20-%20ISCTE-IUL/FACULDADE/ANO_03_SEMESTRE_1/ES/logo.png" />
+                  <Image url="file:../Projeto/src/images/logo.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="32.0" fitWidth="47.0" layoutX="110.0" layoutY="241.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="file:/C:/Users/jonic/OneDrive%20-%20ISCTE-IUL/FACULDADE/ANO_03_SEMESTRE_1/ES/Facebook_Home_logo_old.svg.png" />
+                  <Image url="file:../Projeto/src/images/Facebook_Home_logo_old.svg.png" />
                </image>
             </ImageView>
             <CheckBox fx:id="email_checkbox" layoutX="10.0" layoutY="283.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="101.0" text="E-mail" />
             <ImageView fitHeight="32.0" fitWidth="41.0" layoutX="84.0" layoutY="283.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="file:/C:/Users/jonic/OneDrive%20-%20ISCTE-IUL/FACULDADE/ANO_03_SEMESTRE_1/ES/1200px-Microsoft_Office_Outlook_(2013–present).svg.png" />
+                  <Image url="file:../Projeto\src\images\1200px-Microsoft_Office_Outlook_(2013–present).svg.png" />
                </image>
             </ImageView>
             <TextField fx:id="text_box" layoutX="11.0" layoutY="456.0" />
