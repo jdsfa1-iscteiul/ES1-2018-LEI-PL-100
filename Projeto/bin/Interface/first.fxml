@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<SplitPane fx:controller="Interface.Controller" dividerPositions="0.28595317725752506" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="686.0" prefWidth="892.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+  <items>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+         <children>
+            <CheckBox fx:id="twitter_checkbox" layoutX="10.0" layoutY="199.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="101.0" text="Twitter" />
+            <CheckBox fx:id="facebook_checkbox" layoutX="10.0" layoutY="236.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="117.0" text="Facebook" />
+            <Button fx:id="home_button" layoutX="67.0" layoutY="96.0" mnemonicParsing="false" onAction="#handleHomeButton" prefHeight="32.0" prefWidth="117.0" text="Home" />
+            <ImageView fitHeight="158.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="file:/C:/Users/jonic/OneDrive%20-%20ISCTE-IUL/FACULDADE/ANO_03_SEMESTRE_1/ES/ISCTEIULNormasLogos-02.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="41.0" fitWidth="49.0" layoutX="80.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="file:/C:/Users/jonic/OneDrive%20-%20ISCTE-IUL/FACULDADE/ANO_03_SEMESTRE_1/ES/logo.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="32.0" fitWidth="47.0" layoutX="110.0" layoutY="241.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="file:/C:/Users/jonic/OneDrive%20-%20ISCTE-IUL/FACULDADE/ANO_03_SEMESTRE_1/ES/Facebook_Home_logo_old.svg.png" />
+               </image>
+            </ImageView>
+            <CheckBox fx:id="email_checkbox" layoutX="10.0" layoutY="283.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="101.0" text="E-mail" />
+            <ImageView fitHeight="32.0" fitWidth="41.0" layoutX="84.0" layoutY="283.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="file:/C:/Users/jonic/OneDrive%20-%20ISCTE-IUL/FACULDADE/ANO_03_SEMESTRE_1/ES/1200px-Microsoft_Office_Outlook_(2013–present).svg.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="text_box" layoutX="11.0" layoutY="456.0" />
+            <Label layoutX="14.0" layoutY="424.0" text="Pesquisar por:">
+               <font>
+                  <Font name="Calibri" size="20.0" />
+               </font>
+            </Label>
+            <Button fx:id="search_button" layoutX="11.0" layoutY="494.0" mnemonicParsing="false" onAction="#handleSearchButton" text="Search" />
+            <Label layoutX="14.0" layoutY="164.0" text="Filter by:">
+               <font>
+                  <Font name="Calibri" size="20.0" />
+               </font>
+            </Label>
+            <Button fx:id="confirm_button" layoutX="13.0" layoutY="327.0" mnemonicParsing="false" text="Confirm" />
+         </children></AnchorPane>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="756.0" prefWidth="738.0">
+         <children>
+            <MenuBar prefHeight="32.0" prefWidth="632.0" AnchorPane.topAnchor="0.0">
+              <menus>
+                <Menu mnemonicParsing="false" text="Sign In">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="E-mail" />
+                        <MenuItem mnemonicParsing="false" text="Twitter" />
+                        <MenuItem mnemonicParsing="false" text="Facebook" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+            <Pane layoutY="32.0" prefHeight="652.0" prefWidth="632.0">
+               <children>
+                  <TextArea fx:id="text_posts" editable="false" layoutY="-2.0" prefHeight="660.0" prefWidth="632.0" wrapText="true" />
+               </children></Pane>
+         </children>
+      </AnchorPane>
+  </items>
+</SplitPane>
