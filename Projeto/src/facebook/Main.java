@@ -23,6 +23,7 @@ public class Main {
 		//		String appPass="43577174ac9e2ff07a77aaba6466a2ec";
 
 
+		@SuppressWarnings("deprecation")
 		FacebookClient fb = new DefaultFacebookClient(at);
 
 		User me = fb.fetchObject("me", User.class);
@@ -39,8 +40,6 @@ public class Main {
 				}
 			}
 		}
-		int count = 0;
-
 		Connection<Post> posts = fb.fetchConnection(idGrupoIscte+"/feed", Post.class);
 
 		for (List<Post> postPages: posts)
