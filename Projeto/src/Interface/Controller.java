@@ -18,49 +18,16 @@ public class Controller {
 	
 	public Button search_button;
 	public TextField text_box;
-	public TextArea text_posts;
-	private String idGrupoIscte = "";
-	
-	public void getUserData() {
-		String at = "EAAdoDZCjMNoEBABEtZCdVZC8yMsOZAyBOl2VzJHruDxn4IIxw1sDxvtFgneEzNSwBH1q9dk6qS1UBDfZCbZCN7ZBjqqv2ZArbp1u4baADCdl64pZBrrSsFaNYRqAT85PnOOCoDZBsNZCqPotx4zO6E9IfMb6G1NlYYDo1EZD";
-
-		@SuppressWarnings("deprecation")
-		FacebookClient fb = new DefaultFacebookClient(at);
-
-		User me = fb.fetchObject("me", User.class);
-		System.out.println("Utilizador: \n" + me.getName() +"\n");
-
-
-		Connection<Group> groups = fb.fetchConnection("me/groups", Group.class);
-
-		for(List<Group> groupPages: groups) {
-			for(Group g: groupPages) {
-				if (g.getName().equals("TURMA LEI PL")) {
-					idGrupoIscte = g.getId();
-					System.out.println("Grupo: " + g.getName() + "\n");
-				}
-			}
-		}
-
-		Connection<Post> posts = fb.fetchConnection(idGrupoIscte+"/feed", Post.class);
-
-		for (List<Post> postPages: posts) {
-			for(Post post: postPages) {
-				text_box.appendText(post.getMessage());
-				//System.out.println(post.getMessage());
-				//System.out.println(post.getUpdatedTime());
-				//System.out.println("fb.com/"+ post.getId()+"\n");
-			}
-		}	
-	}
+	public TextArea text_posts;	
 	
 	public void handleSearchButton () {
 		System.out.println("Searching" + " for "+getBoxText() );
 	}
 	
 	public void handleHomeButton() {
-		text_posts.appendText("Ola, encontrámos estas mensagens nos teus grupos: \n");
-		getUserData();
+		text_posts.setText("Ola, encontrámos estas mensagens nos teus grupos: \n");
+		FacebookWorkingThread fbw = new FacebookWorkingThread(text_posts);
+		fbw.start();
 	}
 	
 	private String getBoxText() {
