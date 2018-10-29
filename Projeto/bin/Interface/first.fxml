@@ -11,9 +11,14 @@
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
          <children>
-            <CheckBox fx:id="twitter_checkbox" layoutX="10.0" layoutY="199.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="101.0" text="Twitter" />
-            <CheckBox fx:id="facebook_checkbox" layoutX="10.0" layoutY="236.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="117.0" text="Facebook" />
-            <Button fx:id="home_button" layoutX="67.0" layoutY="96.0" mnemonicParsing="false" onAction="#handleHomeButton" prefHeight="32.0" prefWidth="117.0" text="Home" />
+            <ImageView fitHeight="686.0" fitWidth="417.0" layoutX="-41.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="file:../Projeto/src/images/backgrounf.jpg" />
+               </image>
+            </ImageView>
+            <CheckBox fx:id="twitter_checkbox" layoutX="10.0" layoutY="199.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="101.0" text="Twitter" textFill="WHITE" />
+            <CheckBox fx:id="facebook_checkbox" layoutX="10.0" layoutY="236.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="117.0" text="Facebook" textFill="WHITE" />
+            <Button fx:id="home_button" layoutX="63.0" layoutY="115.0" mnemonicParsing="false" onAction="#handleHomeButton" prefHeight="32.0" prefWidth="117.0" text="Home" />
             <ImageView fitHeight="158.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="file:../Projeto/src/images/ISCTEIULNormasLogos-02.png" />
@@ -29,20 +34,20 @@
                   <Image url="file:../Projeto/src/images/Facebook_Home_logo_old.svg.png" />
                </image>
             </ImageView>
-            <CheckBox fx:id="email_checkbox" layoutX="10.0" layoutY="283.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="101.0" text="E-mail" />
+            <CheckBox fx:id="email_checkbox" layoutX="10.0" layoutY="283.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="101.0" text="E-mail" textFill="WHITE" />
             <ImageView fitHeight="32.0" fitWidth="41.0" layoutX="84.0" layoutY="283.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="file:../Projeto/src/images/1200px-Microsoft_Office_Outlook_(2013–present).svg.png" />
                </image>
             </ImageView>
             <TextField fx:id="text_box" layoutX="11.0" layoutY="456.0" />
-            <Label layoutX="14.0" layoutY="424.0" text="Pesquisar por:">
+            <Label layoutX="14.0" layoutY="424.0" text="Search by:" textFill="WHITE">
                <font>
                   <Font name="Calibri" size="20.0" />
                </font>
             </Label>
             <Button fx:id="search_button" layoutX="11.0" layoutY="494.0" mnemonicParsing="false" onAction="#handleSearchButton" text="Search" />
-            <Label layoutX="14.0" layoutY="164.0" text="Filter by:">
+            <Label layoutX="14.0" layoutY="164.0" text="Filter by:" textFill="#fffefe">
                <font>
                   <Font name="Calibri" size="20.0" />
                </font>
