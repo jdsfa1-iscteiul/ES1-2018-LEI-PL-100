@@ -26,7 +26,13 @@ import javafx.scene.control.TextArea;
 public class FacebookWorkingThread extends Thread {
 	
 	private String idGrupoIscte = "";
-	
+	private Object locker;
+	private ObjectOutputStream oos;
+
+	public FacebookWorkingThread(Object locker, ObjectOutputStream oos) {
+		this.locker=locker;
+		this.oos=oos;
+	}
 	public void start() {
 		String at = "EAAFBpVUIgNIBAFCvP5salaEZA2SdtFPkLxJykkiyHHzLSQgZCk3cl3fG4AzerwjM1mY6bXcnxVzxfavR8KhaKYZCkZB5aMRyXgSMAnelct7v7wzAdGcjVbC1CLZC9ZA3eZCUPUXm4PIPBAeZCbpKgmhbsPBmJLYphPdpm7kKzm2Y5EEfVsnkBNuy";
 		@SuppressWarnings("deprecation")
@@ -49,24 +55,22 @@ public class FacebookWorkingThread extends Thread {
 		
 		Connection<Post> posts = fb.fetchConnection(idGrupoIscte+"/feed", Post.class);
 		
-		try {
-			FileOutputStream f = new FileOutputStream(new File(".\\database.ser"));
-			ObjectOutputStream o = new ObjectOutputStream(f);
-			
 			for (List<Post> postPages: posts) {
 				for(Post post: postPages) {
 					String message = post.getMessage();		
 					if (message != null) {
-						Notification n = new Notification("facebook", message);
-						o.writeObject(n);		
+						Notification notification = new Notification("facebook", message);
+						synchronized(locker) {
+							try {
+								this.oos.writeObject(notification);
+							} catch (IOException e) {
+							
+							}
+							System.out.println(post.getMessage());
+						}
 					}	
 				}
 			}	
-			
-			o.close();
-			f.close();
-		} catch (IOException FileNotFoundException) {
-			
-		}
+		
 	}
 }

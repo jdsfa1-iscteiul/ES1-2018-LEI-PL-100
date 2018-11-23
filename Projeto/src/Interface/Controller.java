@@ -8,9 +8,11 @@ import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -30,34 +32,50 @@ public class Controller {
 	public Button search_button;
 	public TextField text_box;
 	public TextArea text_posts;	
+	private ObjectOutputStream oos;
+	private ObjectInputStream ois;
 	
 	public void handleSearchButton () {
 		System.out.println("Searching" + " for "+getBoxText() );
 	}
 	
 	public void handleHomeButton() throws InterruptedException, ClassNotFoundException, IOException {
-		FacebookWorkingThread fbw = new FacebookWorkingThread();
+		openIStream();
+		openOStream();
+		Object locker = new Object();
+		FacebookWorkingThread fbw = new FacebookWorkingThread(locker, this.oos);
+		EmailWorkingThread ewt = new EmailWorkingThread(locker, this.oos);
 		fbw.start();
+		ewt.start();
 		fbw.join();
+		ewt.join();		
+		
 		text_posts.setText("Ola, encontrámos estas mensagens nos teus grupos: \n");
 		writeDataOnGui();
 	}
+	
+	
+	private void openOStream() throws IOException {
+		FileOutputStream fo = new FileOutputStream(new File(".\\database.ser"));
+		this.oos=new ObjectOutputStream(fo); 	
+	}
+	
+	private void openIStream() throws IOException {
+		FileInputStream fi = new FileInputStream(new File(".\\database.ser"));
+		this.ois=new ObjectInputStream(fi);	
+	}
+	
 	
 	private String getBoxText() {
 		return text_box.getText();
 	}
 	
 	private ArrayList<Notification> loadNotifications() throws IOException, ClassNotFoundException{
-		FileInputStream fi = new FileInputStream(new File(".\\database.ser"));
-		ObjectInputStream oi = new ObjectInputStream(fi);
-		
 		ArrayList<Notification> nots = new ArrayList<Notification>();
 	    while(true){
 		    try{
-		        nots.add((Notification) oi.readObject());
+		        nots.add((Notification) this.ois.readObject());
 		    } catch (EOFException e){
-		    	fi.close();
-		    	oi.close();
 		    	return nots;
 		    }
 	    }
