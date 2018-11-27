@@ -24,7 +24,7 @@ import com.restfb.types.User;
 import javafx.scene.control.TextArea;
 
 public class FacebookWorkingThread extends Thread {
-	
+
 	private String idGrupoIscte = "";
 	private Object locker;
 	private ObjectOutputStream oos;
@@ -48,29 +48,29 @@ public class FacebookWorkingThread extends Thread {
 				if (g.getName().equals("LEI PL ES1")) {
 					idGrupoIscte = g.getId();
 					System.out.println("Grupo: " + g.getName() + "\n");
-					
+
 				}
 			}
 		}
-		
+
 		Connection<Post> posts = fb.fetchConnection(idGrupoIscte+"/feed", Post.class);
-		
-			for (List<Post> postPages: posts) {
-				for(Post post: postPages) {
-					String message = post.getMessage();		
-					if (message != null) {
-						Notification notification = new Notification("facebook", message);
-						synchronized(locker) {
-							try {
-								this.oos.writeObject(notification);
-							} catch (IOException e) {
-							
-							}
-							System.out.println(post.getMessage());
+
+		for (List<Post> postPages: posts) {
+			for(Post post: postPages) {
+				String message = post.getMessage();		
+				if (message != null) {
+					Notification notification = new Notification("facebook", message);
+					synchronized(locker) {
+						try {
+							this.oos.writeObject(notification);
+						} catch (IOException e) {
+
 						}
-					}	
-				}
-			}	
-		
+						System.out.println(post.getMessage());
+					}
+				}	
+			}
+		}	
+
 	}
 }
