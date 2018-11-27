@@ -23,16 +23,44 @@ import com.restfb.types.User;
 
 import javafx.scene.control.TextArea;
 
+/**
+ * Classe para lidar com os pedidos da plataforma Facebook
+ * 
+ * @author Grupo100_LEI-PL
+ *
+ */
 public class FacebookWorkingThread extends Thread {
 
+	/**
+	 * Identificação do Grupo do ISCTE no Facebook
+	 */
 	private String idGrupoIscte = "";
+	
+	/**
+	 * Objeto para implementar mecanismo de cadeado nas várias threads
+	 */
 	private Object locker;
+	
+	/**
+	 * Canal de output
+	 */
 	private ObjectOutputStream oos;
 
+	
+	/**
+	 * Construtor
+	 * @param locker
+	 * @param oos
+	 */
 	public FacebookWorkingThread(Object locker, ObjectOutputStream oos) {
 		this.locker=locker;
 		this.oos=oos;
 	}
+	
+	
+	/**
+	 * Método para ir buscar todos os posts no GRUPO ISCTE ao facebook do cliente
+	 */
 	public void start() {
 		String at = "EAAFBpVUIgNIBAFCvP5salaEZA2SdtFPkLxJykkiyHHzLSQgZCk3cl3fG4AzerwjM1mY6bXcnxVzxfavR8KhaKYZCkZB5aMRyXgSMAnelct7v7wzAdGcjVbC1CLZC9ZA3eZCUPUXm4PIPBAeZCbpKgmhbsPBmJLYphPdpm7kKzm2Y5EEfVsnkBNuy";
 		@SuppressWarnings("deprecation")
