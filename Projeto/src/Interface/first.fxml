@@ -52,7 +52,7 @@
                   <Font name="Calibri" size="20.0" />
                </font>
             </Label>
-            <Button fx:id="confirm_button" layoutX="13.0" layoutY="327.0" mnemonicParsing="false" text="Confirm" />
+            <Button fx:id="confirm_button" layoutX="13.0" layoutY="327.0" mnemonicParsing="false"  text="Confirm" />
          </children></AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="756.0" prefWidth="738.0">
          <children>
