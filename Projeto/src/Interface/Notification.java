@@ -12,14 +12,16 @@ public class Notification implements Serializable {
 	private String platform;
 	private String autor;
 	private Date date;
-	private String Message;
+	private String message;
+	private String subject;
 	
-	public Notification(String platform, String autor, Date date, String message) {
+	public Notification(String platform, String autor, String subject, Date date, String message) {
 		super();
 		this.platform = platform;
 		this.autor = autor;
 		this.date = date;
-		this.Message = message;
+		this.message = message;
+		this.subject = subject;
 	}
 	
 	public Notification(String platform, Date date, String message) {
@@ -27,12 +29,12 @@ public class Notification implements Serializable {
 		this.platform = platform;
 		this.autor = "unknown";
 		this.date = date;
-		this.Message = message;
+		this.message = message;
 	}
 
 	public Notification(String platform, String message) {
 		this.platform = platform;
-		this.Message = message;
+		this.message = message;
 	}	
 
 	public String getPlatform() {
@@ -48,7 +50,21 @@ public class Notification implements Serializable {
 	}
 
 	public String getMessage() {
-		return Message;
+		return message;
+	}
+
+	@Override
+	public String toString() {
+		switch(this.platform) {
+		case "FACEBOOK":
+			return "facebook: "+this.message;
+		case "EMAIL":
+			return "email: " +this.subject;
+		case "TWITTER":
+			return "twitter: "+this.message;
+		default:
+			return this.message;
+		}
 	}
 	
 	
