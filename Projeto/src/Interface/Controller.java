@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.URL;
+import java.sql.DatabaseMetaData;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -52,7 +53,7 @@ public class Controller{
 	private Button confirm_button ;
 	private ObservableSet<CheckBox> selectedCheckBoxes = FXCollections.observableSet();
 	private ObservableSet<CheckBox> unselectedCheckBoxes = FXCollections.observableSet();
-	
+
 	ObservableList<Notification> list = FXCollections.observableArrayList();
 
 	private IntegerBinding numCheckBoxesSelected = Bindings.size(selectedCheckBoxes);
@@ -75,14 +76,14 @@ public class Controller{
 		System.out.println("Searching" + " for "+getBoxText() );
 
 	}
-	/*
+	/**
 	 *  Função temporária que serve para:
 	 *  	1) chama as funçoes para abrir os canais de escrita/leitura na base de dados
 	 *  	2) criar o cadeado que permite a sincronização entre as threads
 	 *  	3) criar e lançar as threads que fazem a busca dos posts
 	 *  	4) chama a função que escreve na interface as informações 
 	 */
-	
+
 	public void handleHomeButton() throws InterruptedException, ClassNotFoundException, IOException {
 		openIStream();
 		openOStream();
@@ -97,19 +98,36 @@ public class Controller{
 		writeDataOnGui();
 	}
 	
+	/**
+	 * Método para acionar os filtros de notificações
+	 */
 	public void handleConfirmButton() throws  InterruptedException, ClassNotFoundException, IOException{
-		if(twitter_checkbox.isSelected()) {
-			
-		}
-		if(facebook_checkbox.isSelected()) {
-			
-		}
-		if(email_checkbox.isSelected()) {
-			
+		if(list.isEmpty()) {
+			notifications_text_area.setText("Nenhuma mensagem para filtrar");
+		}else {
+			filter_list(list);
 		}
 	}
-	
-	/*
+	/**
+	 * Método que acede à lista de notificações e a filtra com base nos checkboxs selecionados
+	 */
+	public void filter_list(ObservableList<Notification> list_to_filter) {
+		ObservableList<Notification> filtered_list = FXCollections.observableArrayList(); 
+		for(int i=0; i< list_to_filter.size(); i++) {
+			if(twitter_checkbox.isSelected() && list_to_filter.get(i).getPlatform()=="TWITTER") {
+				filtered_list.add(list_to_filter.get(i));
+			}
+			if(facebook_checkbox.isSelected() && list_to_filter.get(i).getPlatform()=="FACEBOOK") {
+				filtered_list.add(list_to_filter.get(i));
+			}
+			if(email_checkbox.isSelected() && list_to_filter.get(i).getPlatform()=="EMAIL") {
+				filtered_list.add(list_to_filter.get(i));
+			}
+		}
+		notifications_list.getItems().removeAll();
+		notifications_list.getItems().addAll(filtered_list);
+	}
+	/**
 	 * 	Abrir os canais de escrita/leitura na base de dados
 	 */
 	private void openOStream() throws IOException {
@@ -121,8 +139,8 @@ public class Controller{
 		FileInputStream fi = new FileInputStream(new File(".\\database.ser"));
 		this.ois=new ObjectInputStream(fi);	
 	}
-	
-	/*
+
+	/**
 	 *  Obtem a palavra que o cliente quer procurar nas notificações 
 	 */
 
@@ -130,22 +148,24 @@ public class Controller{
 	private String getBoxText() {
 		return text_box.getText();
 	}
-	
-	/*
+
+	/**
 	 * 	1) Chama a função que lê da base de dados
 	 * 	2) Adiciona à interface a lista de notificações
 	 */
 
 	private void writeDataOnGui() throws IOException, ClassNotFoundException {
 		loadNotifications();
+		notifications_list.getItems().removeAll();
 		notifications_list.getItems().addAll(list);
 	}
-	
-	/*
+
+	/**
 	 *  Função que lê da bd
 	 */
 
 	private void loadNotifications() throws IOException, ClassNotFoundException{
+		list.removeAll();
 		while(true){
 			try{
 				list.add((Notification) this.ois.readObject());
@@ -156,22 +176,24 @@ public class Controller{
 	}
 	@FXML
 	private void displaySelected(MouseEvent event) {
-			Notification notification = this.notifications_list.getSelectionModel().getSelectedItem();
-			if (notification==null) {
-				notifications_text_area.setText("Nenhuma notificação selecionada");
-			} else {
-				notifications_text_area.setText(notification.getMessage());
-			}
-		
+		Notification notification = this.notifications_list.getSelectionModel().getSelectedItem();
+		if (notification==null) {
+			notifications_text_area.setText("Nenhuma notificação selecionada");
+		} else {
+			notifications_text_area.setText(notification.getMessage());
+		}
+
 	}
-	
+
 	private void replyButtonPressed() {
-		
+
 	}
-	
+
 
 	/**
 	 * Método para inicializar as checkboxs
+	 * Confirma se existe pelo menos um filtro seleciona
+	 * Caso contrário desativa o confirm
 	 */
 	public void initialize() {
 		configureCheckBox(twitter_checkbox);
@@ -212,7 +234,7 @@ public class Controller{
 				selectedCheckBoxes.remove(checkBox);
 				unselectedCheckBoxes.add(checkBox);
 			}
-			
+
 		});
 	}
 
