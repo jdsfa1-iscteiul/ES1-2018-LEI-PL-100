@@ -71,7 +71,6 @@ public class Controller{
 	private ListView<Notification> notifications_list;
 	private ObjectOutputStream oos;
 	private ObjectInputStream ois;
-
 	public void handleSearchButton () {
 		System.out.println("Searching" + " for "+getBoxText() );
 
@@ -93,11 +92,11 @@ public class Controller{
 		fbw.start();
 		ewt.start();
 		fbw.join();
-		ewt.join();		
-
+		ewt.join();	
+		
 		writeDataOnGui();
 	}
-	
+
 	/**
 	 * Método para acionar os filtros de notificações
 	 */
@@ -114,17 +113,17 @@ public class Controller{
 	public void filter_list(ObservableList<Notification> list_to_filter) {
 		ObservableList<Notification> filtered_list = FXCollections.observableArrayList(); 
 		for(int i=0; i< list_to_filter.size(); i++) {
-			if(twitter_checkbox.isSelected() && list_to_filter.get(i).getPlatform()=="TWITTER") {
-				filtered_list.add(list_to_filter.get(i));
+			if(twitter_checkbox.isSelected() && list_to_filter.get(i).getPlatform().equals("TWITTER")) {
+				filtered_list.add(list.get(i));
 			}
-			if(facebook_checkbox.isSelected() && list_to_filter.get(i).getPlatform()=="FACEBOOK") {
-				filtered_list.add(list_to_filter.get(i));
+			if(facebook_checkbox.isSelected() && list_to_filter.get(i).getPlatform().equals("facebook")) {
+				filtered_list.add(list.get(i));
 			}
-			if(email_checkbox.isSelected() && list_to_filter.get(i).getPlatform()=="EMAIL") {
-				filtered_list.add(list_to_filter.get(i));
+			if(email_checkbox.isSelected() && list_to_filter.get(i).getPlatform().equals("EMAIL")) {
+				filtered_list.add(list.get(i));
 			}
 		}
-		notifications_list.getItems().removeAll();
+		notifications_list.getItems().clear();
 		notifications_list.getItems().addAll(filtered_list);
 	}
 	/**
@@ -156,7 +155,7 @@ public class Controller{
 
 	private void writeDataOnGui() throws IOException, ClassNotFoundException {
 		loadNotifications();
-		notifications_list.getItems().removeAll();
+		notifications_list.getItems().clear();
 		notifications_list.getItems().addAll(list);
 	}
 
@@ -165,7 +164,7 @@ public class Controller{
 	 */
 
 	private void loadNotifications() throws IOException, ClassNotFoundException{
-		list.removeAll();
+		list.clear();
 		while(true){
 			try{
 				list.add((Notification) this.ois.readObject());
