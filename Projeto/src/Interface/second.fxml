@@ -68,7 +68,7 @@
             <ListView fx:id="notifications_list" layoutY="32.0" onMouseClicked="#displaySelected" onSwipeRight="#displaySelected" onSwipeUp="#displaySelected" prefHeight="650.0" prefWidth="400.0" />
             <Separator layoutX="401.0" layoutY="32.0" orientation="VERTICAL" prefHeight="650.0" prefWidth="20.0" />
             <TextArea fx:id="notifications_text_area" editable="false" layoutX="409.0" layoutY="32.0" prefHeight="595.0" prefWidth="538.0" wrapText="true" />
-            <Button fx:id="reply_button" layoutX="587.0" layoutY="639.0" mnemonicParsing="false"  text="Reply to this notification" />
+            <Button fx:id="reply_button" layoutX="587.0" layoutY="639.0" mnemonicParsing="false"  text="Reply to this notification" onAction="#handleReplyButton"/>
          </children>
       </AnchorPane>
   </items>

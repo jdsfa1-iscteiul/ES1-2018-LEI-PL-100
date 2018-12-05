@@ -6,7 +6,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListView;
@@ -40,6 +43,7 @@ import com.restfb.types.User;
 
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 public class Controller{
 
@@ -230,8 +234,53 @@ public class Controller{
 
 	}
 
-	private void replyButtonPressed() {
-
+	public void handleReplyButton() {
+		Notification notification = this.notifications_list.getSelectionModel().getSelectedItem();
+		if (notification == null) {
+			notifications_text_area.setText("Nenhuma notificação selecionada. Selecione uma primeiro.");
+		}
+		else if (notification.getPlatform().equals("EMAIL")) {
+			try {
+				Parent root= FXMLLoader.load(getClass().getResource("email_reply.fxml"));
+				Scene scene = new Scene(root);
+				Stage stage = new Stage();
+				stage.setScene(scene);
+				stage.setTitle("Email Reply");
+				stage.show();
+				
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		} else if (notification.getPlatform().equals("TWITTER")) {
+			try {
+				Parent root= FXMLLoader.load(getClass().getResource("twitter_reply.fxml"));
+				Scene scene = new Scene(root);
+				Stage stage = new Stage();
+				stage.setScene(scene);
+				stage.setTitle("Twitter Reply");
+				stage.show();
+				
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		} else if (notification.getPlatform().equals("FACEBOOK")) {
+			try {
+			
+				Parent root= FXMLLoader.load(getClass().getResource("facebook_reply.fxml"));
+				Scene scene = new Scene(root);
+				Stage stage = new Stage();
+				stage.setScene(scene);
+				stage.setTitle("Facebook Reply");
+				stage.show();
+				
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		} else {
+			
+		}
+		
+		
 	}
 
 	/**
@@ -247,6 +296,7 @@ public class Controller{
 		System.out.println("Searching" + " for "+getBoxText() );
 
 	}
+
 	
 
 
