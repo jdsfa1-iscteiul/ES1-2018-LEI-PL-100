@@ -33,6 +33,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.restfb.Connection;
 import com.restfb.DefaultFacebookClient;
@@ -241,10 +243,21 @@ public class Controller{
 		}
 		else if (notification.getPlatform().equals("EMAIL")) {
 			try {
-				Parent root= FXMLLoader.load(getClass().getResource("email_reply.fxml"));
-				Scene scene = new Scene(root);
+				FXMLLoader Loader = new FXMLLoader();
+				Loader.setLocation(getClass().getResource("email_reply.fxml"));
+				try {
+					Loader.load();
+				} catch (IOException e) {
+					Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, e);
+				}
+				
+				EmailGuiController email_gui_controller = Loader.getController();
+				email_gui_controller.getNotificationFromGUI(notification);
+				email_gui_controller.setDestinationEmail(notification);
+				
+				Parent p = Loader.getRoot();
 				Stage stage = new Stage();
-				stage.setScene(scene);
+				stage.setScene(new Scene(p));
 				stage.setTitle("Email Reply");
 				stage.show();
 				
@@ -264,18 +277,24 @@ public class Controller{
 				e.printStackTrace();
 			}
 		} else if (notification.getPlatform().equals("FACEBOOK")) {
-			try {
+				FXMLLoader Loader = new FXMLLoader();
+				Loader.setLocation(getClass().getResource("facebook_reply.fxml"));
+				try {
+					Loader.load();
+				} catch (IOException e) {
+					Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, e);
+				}
+				
+				FacebookGuiController facebook_gui_controller = Loader.getController();
+				facebook_gui_controller.getNotificationFromGUI(notification);
+				facebook_gui_controller.setPostText(notification);
 			
-				Parent root= FXMLLoader.load(getClass().getResource("facebook_reply.fxml"));
-				Scene scene = new Scene(root);
+				Parent p = Loader.getRoot();
 				Stage stage = new Stage();
-				stage.setScene(scene);
+				stage.setScene(new Scene(p));
 				stage.setTitle("Facebook Reply");
 				stage.show();
 				
-			} catch(Exception e) {
-				e.printStackTrace();
-			}
 		} else {
 			
 		}
@@ -292,10 +311,32 @@ public class Controller{
 		return text_box.getText();
 	}
 	
-	public void handleSearchButton () {
+	public void handleSearchButtonByWord () {
 		System.out.println("Searching" + " for "+getBoxText() );
 
 	}
+	
+	public void handleSearchButtonBySender () {
+		System.out.println("Searching" + " for "+getBoxText() );
+
+	}
+	
+	public void handleEditButton() {
+		FXMLLoader Loader = new FXMLLoader();
+		Loader.setLocation(getClass().getResource("change_personal_information.fxml"));
+		try {
+			Loader.load();
+		} catch (IOException e) {
+			Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, e);
+		}
+		Parent p = Loader.getRoot();
+		Stage stage = new Stage();
+		stage.setScene(new Scene(p));
+		stage.setTitle("Edit Personal Settings");
+		stage.show();
+	}
+	
+	
 
 	
 

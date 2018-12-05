@@ -21,7 +21,7 @@
             <Button fx:id="home_button" layoutX="111.0" layoutY="99.0" mnemonicParsing="false" onAction="#handleHomeButton" prefHeight="32.0" prefWidth="117.0" text="Home" />
             <ImageView fitHeight="158.0" fitWidth="250.0" layoutX="63.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                 <Image url="file:../Projeto/src/images/ISCTEIULNormasLogos-02.png" />
+                  <Image url="file:../Projeto/src/images/ISCTEIULNormasLogos-02.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="41.0" fitWidth="49.0" layoutX="80.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true">
@@ -31,13 +31,13 @@
             </ImageView>
             <ImageView fitHeight="32.0" fitWidth="47.0" layoutX="110.0" layoutY="241.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                 <Image url="file:../Projeto/src/images/Facebook_Home_logo_old.svg.png" />
+                  <Image url="file:../Projeto/src/images/Facebook_Home_logo_old.svg.png" />
                </image>
             </ImageView>
             <CheckBox fx:id="email_checkbox" layoutX="10.0" layoutY="283.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="101.0" text="E-mail" textFill="WHITE" />
             <ImageView fitHeight="32.0" fitWidth="41.0" layoutX="84.0" layoutY="283.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                   <Image url="file:../Projeto/src/images/1200px-Microsoft_Office_Outlook_(2013–present).svg.png" />
+              	 <Image url="file:../Projeto/src/images/1200px-Microsoft_Office_Outlook_(2013–present).svg.png" />
                </image>
             </ImageView>
             <TextField fx:id="text_box" layoutX="11.0" layoutY="456.0" />
@@ -46,13 +46,15 @@
                   <Font name="Calibri" size="20.0" />
                </font>
             </Label>
-            <Button fx:id="search_button" layoutX="11.0" layoutY="494.0" mnemonicParsing="false" onAction="#handleSearchButton" text="Search" />
+            <Button fx:id="search_by_word_button" layoutX="11.0" layoutY="497.0" mnemonicParsing="false" onAction="#handleSearchButtonByWord" prefHeight="31.0" prefWidth="161.0" text="Search by this word" />
             <Label layoutX="14.0" layoutY="164.0" text="Filter by:" textFill="#fffefe">
                <font>
                   <Font name="Calibri" size="20.0" />
                </font>
             </Label>
-            <Button fx:id="confirm_button" layoutX="13.0" layoutY="327.0" mnemonicParsing="false" onAction="#handleConfirmButton" text="Confirm" />
+            <Button fx:id="confirm_button" layoutX="13.0" layoutY="327.0" mnemonicParsing="false" text="Confirm" />
+            <Button fx:id="search_button_by_sender" layoutX="11.0" layoutY="575.0" mnemonicParsing="false" onAction="#handleSearchButtonBySender" text="Search by this sender" />
+            <Label layoutX="81.0" layoutY="546.0" text="OR" textFill="WHITE" />
          </children></AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="684.0" prefWidth="958.0">
          <children>
@@ -60,7 +62,7 @@
               <menus>
                 <Menu fx:id="edit_button" mnemonicParsing="false" text="Edit personal information">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Close" />
+                    <MenuItem fx:id="edit_menu_option" mnemonicParsing="false" onAction="#handleEditButton" text="Edit" />
                   </items>
                 </Menu>
               </menus>
@@ -68,7 +70,7 @@
             <ListView fx:id="notifications_list" layoutY="32.0" onMouseClicked="#displaySelected" onSwipeRight="#displaySelected" onSwipeUp="#displaySelected" prefHeight="650.0" prefWidth="400.0" />
             <Separator layoutX="401.0" layoutY="32.0" orientation="VERTICAL" prefHeight="650.0" prefWidth="20.0" />
             <TextArea fx:id="notifications_text_area" editable="false" layoutX="409.0" layoutY="32.0" prefHeight="595.0" prefWidth="538.0" wrapText="true" />
-            <Button fx:id="reply_button" layoutX="587.0" layoutY="639.0" mnemonicParsing="false"  text="Reply to this notification" onAction="#handleReplyButton"/>
+            <Button fx:id="reply_button" layoutX="587.0" layoutY="639.0" mnemonicParsing="false" onAction="#handleReplyButton" text="Reply to this notification" />
          </children>
       </AnchorPane>
   </items>
