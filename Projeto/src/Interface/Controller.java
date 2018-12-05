@@ -162,13 +162,14 @@ public class Controller{
 		if(list.isEmpty()) {
 			notifications_text_area.setText("Nenhuma mensagem para filtrar");
 		}else {
-			filter_list(list);
+			filter_list_by_plataform(list);
 		}
 	}
+
 	/**
 	 * Método que acede à lista de notificações e a filtra com base nos checkboxs selecionados
 	 */
-	public void filter_list(ObservableList<Notification> list_to_filter) {
+	public void filter_list_by_plataform(ObservableList<Notification> list_to_filter) {
 		ObservableList<Notification> filtered_list = FXCollections.observableArrayList(); 
 		for(int i=0; i< list_to_filter.size(); i++) {
 			if(twitter_checkbox.isSelected() && list_to_filter.get(i).getPlatform().equals("TWITTER")) {
@@ -193,7 +194,6 @@ public class Controller{
 	 *  	3) criar e lançar as threads que fazem a busca dos posts
 	 *  	4) chama a função que escreve na interface as informações 
 	 */
-
 	public void handleHomeButton() throws InterruptedException, ClassNotFoundException, IOException {
 		DistributorThread dist = new DistributorThread(this, this.oos);
 		dist.start();
@@ -203,7 +203,6 @@ public class Controller{
 	 * 	1) Chama a função que lê da base de dados
 	 * 	2) Adiciona à interface a lista de notificações
 	 */
-
 	public void writeDataOnGui() throws IOException, ClassNotFoundException {
 		loadNotifications();
 		notifications_list.getItems().clear();
@@ -213,7 +212,6 @@ public class Controller{
 	/**
 	 *  Função que lê da bd
 	 */
-
 	private void loadNotifications() throws IOException, ClassNotFoundException{
 		list.clear();
 		while(true){
@@ -224,6 +222,7 @@ public class Controller{
 			}
 		}
 	}
+
 	@FXML
 	private void displaySelected(MouseEvent event) {
 		Notification notification = this.notifications_list.getSelectionModel().getSelectedItem();
@@ -305,20 +304,51 @@ public class Controller{
 	/**
 	 *  Obtem a palavra que o cliente quer procurar nas notificações 
 	 */
-
-
 	private String getBoxText() {
 		return text_box.getText();
 	}
 	
+	/**
+	 * Acionado pelo botão, valida se a lista não está vazia, se existe palavra para procurar e invoca a função filtradora
+	 */
 	public void handleSearchButtonByWord () {
 		System.out.println("Searching" + " for "+getBoxText() );
-
+		if(list.isEmpty() || getBoxText().isEmpty()) {
+			notifications_text_area.setText("Nenhuma mensagem ou palavra para procurar");
+			notifications_list.getItems().clear();
+		}else {
+			filter_list_by(list,getBoxText(),1);
+			notifications_text_area.clear();
+		}
 	}
 	
+	/**
+	 * Acionado pelo botão, valida se a lista não está vazia e invoca a função filtradora por remetente
+	 */
 	public void handleSearchButtonBySender () {
 		System.out.println("Searching" + " for "+getBoxText() );
-
+		if(list.isEmpty() || getBoxText().isEmpty()) {
+			notifications_text_area.setText("Nenhuma mensagem onde procurar");
+			notifications_list.getItems().clear();
+		}else {
+			filter_list_by(list, getBoxText(),2);
+			notifications_text_area.clear();
+		}
+	}
+	
+	/**
+	 * Filtra a lista de notificações consoante a palavra ou remetente pedido
+	 */
+	public void filter_list_by(ObservableList<Notification> list_to_filter, String word_to_search, int type) {
+		ObservableList<Notification> filtered_list = FXCollections.observableArrayList(); 
+		for(int i=0; i< list_to_filter.size(); i++) {
+			if(type==1 && list_to_filter.get(i).getMessage().contains(word_to_search) )
+				filtered_list.add(list_to_filter.get(i));
+			else if (type==2 && list_to_filter.get(i).getAutor().contains(word_to_search))
+				filtered_list.add(list_to_filter.get(i));
+		}
+		notifications_list.getItems().clear();
+		notifications_list.getItems().addAll(filtered_list);
 	}
 	
 	public void handleEditButton() {
