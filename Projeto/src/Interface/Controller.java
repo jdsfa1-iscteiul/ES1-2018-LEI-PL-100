@@ -162,6 +162,7 @@ public class Controller{
 		if(list.isEmpty()) {
 			notifications_text_area.setText("Nenhuma mensagem para filtrar");
 		}else {
+			System.out.println("entrei");
 			filter_list_by_plataform(list);
 		}
 	}
@@ -175,15 +176,17 @@ public class Controller{
 			if(twitter_checkbox.isSelected() && list_to_filter.get(i).getPlatform().equals("TWITTER")) {
 				filtered_list.add(list.get(i));
 			}
-			else if(facebook_checkbox.isSelected() && list_to_filter.get(i).getPlatform().equals("facebook")) {
+			else if(facebook_checkbox.isSelected() && list_to_filter.get(i).getPlatform().equals("FACEBOOK")) {
 				filtered_list.add(list.get(i));
 			}
 			else if(email_checkbox.isSelected() && list_to_filter.get(i).getPlatform().equals("EMAIL")) {
 				filtered_list.add(list.get(i));
 			}
 		}
+		list.clear();
+		list.addAll(filtered_list);
 		notifications_list.getItems().clear();
-		notifications_list.getItems().addAll(filtered_list);
+		notifications_list.getItems().addAll(list);
 	}
 
 	
@@ -347,6 +350,8 @@ public class Controller{
 			else if (type==2 && list_to_filter.get(i).getAutor().contains(word_to_search))
 				filtered_list.add(list_to_filter.get(i));
 		}
+		list.clear();
+		list.addAll(filtered_list);
 		notifications_list.getItems().clear();
 		notifications_list.getItems().addAll(filtered_list);
 	}

@@ -32,11 +32,6 @@ public class Notification implements Serializable {
 		this.message = message;
 	}
 
-//	public Notification(String platform, String message) {
-//		this.platform = platform;
-//		this.message = message;
-//	}	
-
 	public String getPlatform() {
 		return platform;
 	}
