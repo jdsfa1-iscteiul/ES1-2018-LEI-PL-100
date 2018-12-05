@@ -11,11 +11,11 @@ public class Notification implements Serializable {
 	
 	private String platform;
 	private String autor;
-	private Date date;
+	private java.util.Date date;
 	private String message;
 	private String subject;
 	
-	public Notification(String platform, String autor, String subject, Date date, String message) {
+	public Notification(String platform, String autor, String subject, java.util.Date date, String message) {
 		super();
 		this.platform = platform;
 		this.autor = autor;
@@ -24,7 +24,7 @@ public class Notification implements Serializable {
 		this.subject = subject;
 	}
 	
-	public Notification(String platform, Date date, String message) {
+	public Notification(String platform, java.util.Date date, String message) {
 		super();
 		this.platform = platform;
 		this.autor = "unknown";
@@ -32,10 +32,10 @@ public class Notification implements Serializable {
 		this.message = message;
 	}
 
-	public Notification(String platform, String message) {
-		this.platform = platform;
-		this.message = message;
-	}	
+//	public Notification(String platform, String message) {
+//		this.platform = platform;
+//		this.message = message;
+//	}	
 
 	public String getPlatform() {
 		return platform;
@@ -45,7 +45,7 @@ public class Notification implements Serializable {
 		return autor;
 	}
 
-	public Date getDate() {
+	public java.util.Date getDate() {
 		return date;
 	}
 

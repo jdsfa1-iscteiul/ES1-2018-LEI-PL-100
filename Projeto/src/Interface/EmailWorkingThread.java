@@ -84,7 +84,7 @@ public class EmailWorkingThread extends Thread{
 
 		      for (int i = 0, n = messages.length; i < n; i++) {
 		         Message message = messages[i];
-		         Notification notification = new Notification("EMAIL", message.getFrom()[0].toString(), message.getSubject(), (Date) message.getReceivedDate(),  message.getContent().toString());
+		         Notification notification = new Notification("EMAIL", message.getFrom()[0].toString(), message.getSubject(), message.getSentDate(),  message.getContent().toString());
 		         synchronized(locker) {
 		        	 this.oos.writeObject(notification);
 		         }

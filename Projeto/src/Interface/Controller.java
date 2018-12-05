@@ -168,10 +168,10 @@ public class Controller{
 			if(twitter_checkbox.isSelected() && list_to_filter.get(i).getPlatform().equals("TWITTER")) {
 				filtered_list.add(list.get(i));
 			}
-			if(facebook_checkbox.isSelected() && list_to_filter.get(i).getPlatform().equals("facebook")) {
+			else if(facebook_checkbox.isSelected() && list_to_filter.get(i).getPlatform().equals("facebook")) {
 				filtered_list.add(list.get(i));
 			}
-			if(email_checkbox.isSelected() && list_to_filter.get(i).getPlatform().equals("EMAIL")) {
+			else if(email_checkbox.isSelected() && list_to_filter.get(i).getPlatform().equals("EMAIL")) {
 				filtered_list.add(list.get(i));
 			}
 		}
@@ -224,7 +224,8 @@ public class Controller{
 		if (notification==null) {
 			notifications_text_area.setText("Nenhuma notificação selecionada");
 		} else {
-			notifications_text_area.setText(notification.getMessage());
+			String enterKey = System.getProperty("line.separator");
+			notifications_text_area.setText(notification.getMessage() + enterKey + enterKey + "Date: " + notification.getDate());
 		}
 
 	}
