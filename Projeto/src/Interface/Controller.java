@@ -53,8 +53,9 @@ public class Controller{
 	private Button confirm_button ;
 	private ObservableSet<CheckBox> selectedCheckBoxes = FXCollections.observableSet();
 	private ObservableSet<CheckBox> unselectedCheckBoxes = FXCollections.observableSet();
-
-	ObservableList<Notification> list = FXCollections.observableArrayList();
+	
+	@FXML
+	private ObservableList<Notification> list = FXCollections.observableArrayList();
 
 	private IntegerBinding numCheckBoxesSelected = Bindings.size(selectedCheckBoxes);
 
@@ -71,30 +72,81 @@ public class Controller{
 	private ListView<Notification> notifications_list;
 	private ObjectOutputStream oos;
 	private ObjectInputStream ois;
-	public void handleSearchButton () {
-		System.out.println("Searching" + " for "+getBoxText() );
+	
 
-	}
+
 	/**
-	 *  Função temporária que serve para:
-	 *  	1) chama as funçoes para abrir os canais de escrita/leitura na base de dados
-	 *  	2) criar o cadeado que permite a sincronização entre as threads
-	 *  	3) criar e lançar as threads que fazem a busca dos posts
-	 *  	4) chama a função que escreve na interface as informações 
+	 * Método iniciado automaticamente 
+	 * Método para inicializar as checkboxs
+	 * Confirma se existe pelo menos um filtro seleciona
+	 * Caso contrário desativa o confirm
 	 */
-
-	public void handleHomeButton() throws InterruptedException, ClassNotFoundException, IOException {
-		openIStream();
-		openOStream();
-		Object locker = new Object();
-		FacebookWorkingThread fbw = new FacebookWorkingThread(locker, this.oos);
-		EmailWorkingThread ewt = new EmailWorkingThread(locker, this.oos);
-		fbw.start();
-		ewt.start();
-		fbw.join();
-		ewt.join();	
+	public void initialize() {
 		
-		writeDataOnGui();
+		try {
+			openIStream();
+			openOStream();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+		
+		configureCheckBox(twitter_checkbox);
+		configureCheckBox(facebook_checkbox);
+		configureCheckBox(email_checkbox);
+
+		confirm_button.setDisable(true);
+
+		numCheckBoxesSelected.addListener((obs, oldSelectedCount, newSelectedCount) -> {
+			System.out.println((newSelectedCount.intValue()));
+			if (newSelectedCount.intValue() >= 1) {
+				selectedCheckBoxes.forEach(cb -> cb.setDisable(false));
+				confirm_button.setDisable(false);
+			} else {
+				selectedCheckBoxes.forEach(cb -> cb.setDisable(true));
+				confirm_button.setDisable(true);
+			}
+		});
+	}
+
+	/**
+	 * 	Abrir os canais de escrita na base de dados
+	 */
+	private void openOStream() throws IOException {
+		FileOutputStream fo = new FileOutputStream(new File(".\\database.ser"));
+		this.oos=new ObjectOutputStream(fo); 	
+	}
+	
+	/**
+	 * 	Abrir os canais de leitura na base de dados
+	 */
+	private void openIStream() throws IOException {
+		FileInputStream fi = new FileInputStream(new File(".\\database.ser"));
+		this.ois=new ObjectInputStream(fi);	
+	}
+
+	/**
+	 * Método para configurar as checkboxs
+	 */
+	private void configureCheckBox(CheckBox checkBox) {
+
+		if (checkBox.isSelected()) {
+			selectedCheckBoxes.add(checkBox);
+		} else {
+			unselectedCheckBoxes.add(checkBox);
+		}
+
+		checkBox.selectedProperty().addListener((obs, wasSelected, isNowSelected) -> {
+			if (isNowSelected) {
+				unselectedCheckBoxes.remove(checkBox);
+				selectedCheckBoxes.add(checkBox);
+			} else {
+				selectedCheckBoxes.remove(checkBox);
+				unselectedCheckBoxes.add(checkBox);
+			}
+
+		});
 	}
 
 	/**
@@ -126,26 +178,19 @@ public class Controller{
 		notifications_list.getItems().clear();
 		notifications_list.getItems().addAll(filtered_list);
 	}
-	/**
-	 * 	Abrir os canais de escrita/leitura na base de dados
-	 */
-	private void openOStream() throws IOException {
-		FileOutputStream fo = new FileOutputStream(new File(".\\database.ser"));
-		this.oos=new ObjectOutputStream(fo); 	
-	}
 
-	private void openIStream() throws IOException {
-		FileInputStream fi = new FileInputStream(new File(".\\database.ser"));
-		this.ois=new ObjectInputStream(fi);	
-	}
-
+	
 	/**
-	 *  Obtem a palavra que o cliente quer procurar nas notificações 
+	 *  Função temporária que serve para:
+	 *  	1) chama as funçoes para abrir os canais de escrita/leitura na base de dados
+	 *  	2) criar o cadeado que permite a sincronização entre as threads
+	 *  	3) criar e lançar as threads que fazem a busca dos posts
+	 *  	4) chama a função que escreve na interface as informações 
 	 */
 
-
-	private String getBoxText() {
-		return text_box.getText();
+	public void handleHomeButton() throws InterruptedException, ClassNotFoundException, IOException {
+		DistributorThread dist = new DistributorThread(this, this.oos);
+		dist.start();
 	}
 
 	/**
@@ -153,7 +198,7 @@ public class Controller{
 	 * 	2) Adiciona à interface a lista de notificações
 	 */
 
-	private void writeDataOnGui() throws IOException, ClassNotFoundException {
+	public void writeDataOnGui() throws IOException, ClassNotFoundException {
 		loadNotifications();
 		notifications_list.getItems().clear();
 		notifications_list.getItems().addAll(list);
@@ -188,54 +233,20 @@ public class Controller{
 
 	}
 
-
 	/**
-	 * Método para inicializar as checkboxs
-	 * Confirma se existe pelo menos um filtro seleciona
-	 * Caso contrário desativa o confirm
+	 *  Obtem a palavra que o cliente quer procurar nas notificações 
 	 */
-	public void initialize() {
-		configureCheckBox(twitter_checkbox);
-		configureCheckBox(facebook_checkbox);
-		configureCheckBox(email_checkbox);
 
-		confirm_button.setDisable(true);
 
-		numCheckBoxesSelected.addListener((obs, oldSelectedCount, newSelectedCount) -> {
-			System.out.println((newSelectedCount.intValue()));
-			if (newSelectedCount.intValue() >= 1) {
-				selectedCheckBoxes.forEach(cb -> cb.setDisable(false));
-				confirm_button.setDisable(false);
-			} else {
-				selectedCheckBoxes.forEach(cb -> cb.setDisable(true));
-				confirm_button.setDisable(true);
-			}
-		});
+	private String getBoxText() {
+		return text_box.getText();
 	}
+	
+	public void handleSearchButton () {
+		System.out.println("Searching" + " for "+getBoxText() );
 
-
-	/**
-	 * Método para configurar as checkboxs
-	 */
-	private void configureCheckBox(CheckBox checkBox) {
-
-		if (checkBox.isSelected()) {
-			selectedCheckBoxes.add(checkBox);
-		} else {
-			unselectedCheckBoxes.add(checkBox);
-		}
-
-		checkBox.selectedProperty().addListener((obs, wasSelected, isNowSelected) -> {
-			if (isNowSelected) {
-				unselectedCheckBoxes.remove(checkBox);
-				selectedCheckBoxes.add(checkBox);
-			} else {
-				selectedCheckBoxes.remove(checkBox);
-				unselectedCheckBoxes.add(checkBox);
-			}
-
-		});
 	}
+	
 
 
 }
