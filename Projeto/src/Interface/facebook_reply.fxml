@@ -26,7 +26,7 @@
                   <Image url="file:../Projeto/src/images/Facebook_Home_logo_old.svg.png" />
                </image>
             </ImageView>
-            <Button fx:id="send_button" layoutX="286.0" layoutY="381.0" mnemonicParsing="false" text="Send" />
+            <Button fx:id="send_button" layoutX="286.0" layoutY="381.0" mnemonicParsing="false" onAction="#handleFacebookSendButton" text="Send" />
             <TextArea fx:id="reply_box" layoutX="27.0" layoutY="231.0" prefHeight="142.0" prefWidth="569.0" />
          </children></AnchorPane>
   </content>

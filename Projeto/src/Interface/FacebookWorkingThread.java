@@ -88,6 +88,7 @@ public class FacebookWorkingThread extends Thread {
 				String message = post.getMessage();		
 				if (message != null) {
 					Notification notification = new Notification("FACEBOOK", post.getUpdatedTime(), message);
+					notification.setID(post.getId());
 					synchronized(locker) {
 						try {
 							this.oos.writeObject(notification);

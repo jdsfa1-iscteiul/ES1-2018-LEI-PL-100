@@ -254,7 +254,7 @@ public class Controller{
 				}
 				
 				EmailGuiController email_gui_controller = Loader.getController();
-				email_gui_controller.getNotificationFromGUI(notification);
+				email_gui_controller.setNotificationFromGUI(notification);
 				email_gui_controller.setDestinationEmail(notification);
 				
 				Parent p = Loader.getRoot();
@@ -288,7 +288,7 @@ public class Controller{
 				}
 				
 				FacebookGuiController facebook_gui_controller = Loader.getController();
-				facebook_gui_controller.getNotificationFromGUI(notification);
+				facebook_gui_controller.setNotificationFromGUI(notification);
 				facebook_gui_controller.setPostText(notification);
 			
 				Parent p = Loader.getRoot();
@@ -370,10 +370,4 @@ public class Controller{
 		stage.setTitle("Edit Personal Settings");
 		stage.show();
 	}
-	
-	
-
-	
-
-
 }

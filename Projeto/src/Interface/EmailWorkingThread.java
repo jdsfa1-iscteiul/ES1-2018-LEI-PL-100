@@ -19,11 +19,13 @@ public class EmailWorkingThread extends Thread{
 		this.locker = locker;
 		this.oos=oos;
 	}
+	public EmailWorkingThread() {
+	}
 	
 	public void run() {
 		receive();
 	}
-	public void send(String from, String dst) {
+	public void send(String from, String dst, String subject, String text) {
 			
 			Properties props = new Properties();
 			props.put("mail.smtp.auth", "true");
@@ -44,9 +46,11 @@ public class EmailWorkingThread extends Thread{
 				message.setFrom(new InternetAddress(from));
 				message.setRecipients(Message.RecipientType.TO,
 					InternetAddress.parse(dst));
-				message.setSubject("Testing Subject");
-				message.setText("Dear Mail Crawler,"
-					+ "\n\n No spam to my email, please!");
+				message.setSubject(subject);
+				message.setText(text);
+//				message.setSubject("Testing Subject");
+//				message.setText("Dear Mail Crawler,"
+//					+ "\n\n No spam to my email, please!");
 		
 				Transport.send(message);
 		
