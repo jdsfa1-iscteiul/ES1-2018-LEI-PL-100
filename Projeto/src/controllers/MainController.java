@@ -21,6 +21,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Comparator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -168,6 +169,7 @@ public class MainController{
 		}
 		list.clear();
 		list.addAll(filtered_list);
+		sortList(list);
 		notifications_list.getItems().clear();
 		notifications_list.getItems().addAll(list);
 	}
@@ -191,6 +193,7 @@ public class MainController{
 	 */
 	public void writeDataOnGui() throws IOException, ClassNotFoundException {
 		loadNotifications();
+		sortList(list);
 		notifications_list.getItems().clear();
 		notifications_list.getItems().addAll(list);
 	}
@@ -335,6 +338,7 @@ public class MainController{
 		}
 		list.clear();
 		list.addAll(filtered_list);
+		sortList(list);
 		notifications_list.getItems().clear();
 		notifications_list.getItems().addAll(filtered_list);
 	}
@@ -356,5 +360,17 @@ public class MainController{
 		stage.setScene(new Scene(p));
 		stage.setTitle("Edit Personal Settings");
 		stage.show();
+	}
+	
+	/**
+	 * Ordena a lista de notificações por data
+	 */
+	public void sortList(ObservableList<Notification> list_to_sort) {
+		FXCollections.sort(list, new Comparator<Notification>() {
+			@Override
+			public int compare(Notification arg0, Notification arg1) {
+				return arg0.getDate().compareTo(arg1.getDate());
+			}
+			});
 	}
 }
