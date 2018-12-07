@@ -24,7 +24,12 @@ public class DistributorThread extends Thread {
 		
 	
 		public void run() {
-	
+			try {
+				oos.reset();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			Object locker = new Object();
 			FacebookWorkingThread fbw = new FacebookWorkingThread(locker, this.oos);
 			EmailWorkingThread ewt = new EmailWorkingThread(locker, this.oos);
@@ -33,7 +38,7 @@ public class DistributorThread extends Thread {
 			ewt.start();
 			twt.start();
 			try {
-				//fbw.join();
+				fbw.join();
 				ewt.join();
 				twt.join();
 			} catch (InterruptedException e) {

@@ -44,7 +44,7 @@ public class MainController{
 	private Button confirm_button ;
 	private ObservableSet<CheckBox> selectedCheckBoxes = FXCollections.observableSet();
 	private ObservableSet<CheckBox> unselectedCheckBoxes = FXCollections.observableSet();
-	
+
 	@FXML
 	private ObservableList<Notification> list = FXCollections.observableArrayList();
 
@@ -65,7 +65,7 @@ public class MainController{
 	private ListView<Notification> notifications_list;
 	private ObjectOutputStream oos;
 	private ObjectInputStream ois;
-	
+
 
 
 	/**
@@ -75,16 +75,13 @@ public class MainController{
 	 * Caso contrário desativa o confirm
 	 */
 	public void initialize() {
-		
+
 		try {
-			openIStream();
-			openOStream();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			writeDataOnGui();
+		} catch (ClassNotFoundException | IOException e) {
 			e.printStackTrace();
 		}
-	
-		
+
 		configureCheckBox(twitter_checkbox);
 		configureCheckBox(facebook_checkbox);
 		configureCheckBox(email_checkbox);
@@ -106,15 +103,15 @@ public class MainController{
 	 * 	Abrir os canais de escrita na base de dados
 	 */
 	private void openOStream() throws IOException {
-		FileOutputStream fo = new FileOutputStream(new File(".\\database.ser"));
+		FileOutputStream fo = new FileOutputStream(".\\database.ser");
 		this.oos=new ObjectOutputStream(fo); 	
 	}
-	
+
 	/**
 	 * 	Abrir os canais de leitura na base de dados
 	 */
 	private void openIStream() throws IOException {
-		FileInputStream fi = new FileInputStream(new File(".\\database.ser"));
+		FileInputStream fi = new FileInputStream(".\\database.ser");
 		this.ois=new ObjectInputStream(fi);	
 	}
 
@@ -137,7 +134,6 @@ public class MainController{
 				selectedCheckBoxes.remove(checkBox);
 				unselectedCheckBoxes.add(checkBox);
 			}
-
 		});
 	}
 
@@ -176,7 +172,7 @@ public class MainController{
 		notifications_list.getItems().addAll(list);
 	}
 
-	
+
 	/**
 	 *  Função temporária que serve para:
 	 *  	1) chama as funçoes para abrir os canais de escrita/leitura na base de dados
@@ -185,45 +181,22 @@ public class MainController{
 	 *  	4) chama a função que escreve na interface as informações 
 	 */
 	public void handleRefreshButton() throws InterruptedException, ClassNotFoundException, IOException {
+		try {
+			openOStream();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		DistributorThread dist = new DistributorThread(this, this.oos);
 		dist.start();
 	}
-	
+
 	public void handleHomeButton() {
-		ObservableList<Notification> list_aux = FXCollections.observableArrayList();
-		try{
-			ObjectInputStream in = new ObjectInputStream(new FileInputStream(".\\database.ser"));
-			int count = 0;
-			try {
-				while (true) {
-					count++;
-					try {
-						Notification obj = (Notification) in.readObject();
-						list_aux.add(obj);
-					} catch (ClassNotFoundException e) {
-						System.out.println("Can't read obj #" + count + ": " + e);
-					}
-				}
-			} 
-			catch (EOFException e) {
-				// no more objects to read
-			}
-			catch (IOException e) {}
-			finally {
-				in.close();
-			}
+		try {
+			writeDataOnGui();
+		} catch (IOException | ClassNotFoundException e) {
+			e.printStackTrace();
 		}
-		catch (FileNotFoundException e) {System.out.println("File not Found");}
-		catch (IOException e) {System.out.println("Input out of bounds");}
-		list.clear();
-		list.addAll(list_aux);
-		if(!list.isEmpty()) {
-			sortList(list);
-			notifications_list.getItems().clear();
-			notifications_list.getItems().addAll(list);
-			notifications_text_area.clear();
-		}
-		else notifications_text_area.setText("Nenhuma mensagem na base de dados");
 	}
 
 	/**
@@ -231,6 +204,12 @@ public class MainController{
 	 * 	2) Adiciona à interface a lista de notificações
 	 */
 	public void writeDataOnGui() throws IOException, ClassNotFoundException {
+		try {
+			openIStream();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		loadNotifications();
 		sortList(list);
 		notifications_list.getItems().clear();
@@ -277,63 +256,63 @@ public class MainController{
 				} catch (IOException e) {
 					Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, e);
 				}
-				
+
 				EmailGuiController email_gui_controller = Loader.getController();
 				email_gui_controller.setNotificationFromGUI(notification);
 				email_gui_controller.setDestinationEmail(notification);
-				
+
 				Parent p = Loader.getRoot();
 				Stage stage = new Stage();
 				stage.setScene(new Scene(p));
 				stage.setTitle("Email Reply");
 				stage.show();
-				
+
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
 		} else if (notification.getPlatform().equals("TWITTER")) {
-				FXMLLoader Loader = new FXMLLoader();
-				Loader.setLocation(getClass().getResource("../FXMLFiles/twitter_reply.fxml"));
-				try {
-					Loader.load();
-				} catch (IOException e) {
-					Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, e);
-				}
-				
-				TwitterGuiController twitter_gui_controller = Loader.getController();
-				twitter_gui_controller.setNotificationFromGUI(notification);
-				twitter_gui_controller.setPostText(notification);
-			
-				Parent p = Loader.getRoot();
-				Stage stage = new Stage();
-				stage.setScene(new Scene(p));
-				stage.setTitle("Twitter Reply");
-				stage.show();
-			
+			FXMLLoader Loader = new FXMLLoader();
+			Loader.setLocation(getClass().getResource("../FXMLFiles/twitter_reply.fxml"));
+			try {
+				Loader.load();
+			} catch (IOException e) {
+				Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, e);
+			}
+
+			TwitterGuiController twitter_gui_controller = Loader.getController();
+			twitter_gui_controller.setNotificationFromGUI(notification);
+			twitter_gui_controller.setPostText(notification);
+
+			Parent p = Loader.getRoot();
+			Stage stage = new Stage();
+			stage.setScene(new Scene(p));
+			stage.setTitle("Twitter Reply");
+			stage.show();
+
 		} else if (notification.getPlatform().equals("FACEBOOK")) {
-				FXMLLoader Loader = new FXMLLoader();
-				Loader.setLocation(getClass().getResource("../FXMLFiles/facebook_reply.fxml"));
-				try {
-					Loader.load();
-				} catch (IOException e) {
-					Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, e);
-				}
-				
-				FacebookGuiController facebook_gui_controller = Loader.getController();
-				facebook_gui_controller.setNotificationFromGUI(notification);
-				facebook_gui_controller.setPostText(notification);
-			
-				Parent p = Loader.getRoot();
-				Stage stage = new Stage();
-				stage.setScene(new Scene(p));
-				stage.setTitle("Facebook Reply");
-				stage.show();
-				
+			FXMLLoader Loader = new FXMLLoader();
+			Loader.setLocation(getClass().getResource("../FXMLFiles/facebook_reply.fxml"));
+			try {
+				Loader.load();
+			} catch (IOException e) {
+				Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, e);
+			}
+
+			FacebookGuiController facebook_gui_controller = Loader.getController();
+			facebook_gui_controller.setNotificationFromGUI(notification);
+			facebook_gui_controller.setPostText(notification);
+
+			Parent p = Loader.getRoot();
+			Stage stage = new Stage();
+			stage.setScene(new Scene(p));
+			stage.setTitle("Facebook Reply");
+			stage.show();
+
 		} else {
-			
+
 		}
-		
-		
+
+
 	}
 
 	/**
@@ -342,7 +321,7 @@ public class MainController{
 	private String getBoxText() {
 		return text_box.getText();
 	}
-	
+
 	/**
 	 * Acionado pelo botão, valida se a lista não está vazia, se existe palavra para procurar e invoca a função filtradora
 	 */
@@ -356,7 +335,7 @@ public class MainController{
 			notifications_text_area.clear();
 		}
 	}
-	
+
 	/**
 	 * Acionado pelo botão, valida se a lista não está vazia e invoca a função filtradora por remetente
 	 */
@@ -370,7 +349,7 @@ public class MainController{
 			notifications_text_area.clear();
 		}
 	}
-	
+
 	/**
 	 * Filtra a lista de notificações consoante a palavra ou remetente pedido
 	 */
@@ -388,7 +367,7 @@ public class MainController{
 		notifications_list.getItems().clear();
 		notifications_list.getItems().addAll(filtered_list);
 	}
-	
+
 	public void handleEditButton() throws Exception {
 		FXMLLoader Loader = new FXMLLoader();
 		Loader.setLocation(getClass().getResource("../FXMLFiles/change_personal_information.fxml"));
@@ -397,17 +376,17 @@ public class MainController{
 		} catch (IOException e) {
 			Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, e);
 		}
-	
+
 		EditGuiController egc = Loader.getController();
 		egc.setOldDataOnBoxes();
-		
+
 		Parent p = Loader.getRoot();
 		Stage stage = new Stage();
 		stage.setScene(new Scene(p));
 		stage.setTitle("Edit Personal Settings");
 		stage.show();
 	}
-	
+
 	/**
 	 * Ordena a lista de notificações por data
 	 */
@@ -417,6 +396,6 @@ public class MainController{
 			public int compare(Notification arg0, Notification arg1) {
 				return arg1.getDate().compareTo(arg0.getDate());
 			}
-			});
+		});
 	}
 }
