@@ -12,7 +12,7 @@
          <children>
             <ImageView fitHeight="66.0" fitWidth="69.0" layoutX="320.0" layoutY="-10.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@logo.png" />
+                  <Image url="file:../Projeto/src/images/logo.png" />
                </image>
             </ImageView>
             <TextArea fx:id="tweet_box" editable="false" layoutX="14.0" layoutY="54.0" prefHeight="134.0" prefWidth="682.0" wrapText="true" />
@@ -27,7 +27,7 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <Button fx:id="send_button" layoutX="311.0" layoutY="410.0" mnemonicParsing="false" text="Send" />
+            <Button fx:id="send_button" layoutX="311.0" layoutY="410.0" mnemonicParsing="false" text="Send" onAction="#handleSendButton"/>
          </children></AnchorPane>
   </content>
 </TitledPane>

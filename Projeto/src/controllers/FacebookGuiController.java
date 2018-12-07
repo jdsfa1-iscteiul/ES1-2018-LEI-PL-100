@@ -32,9 +32,11 @@ public class FacebookGuiController {
 	public Notification getNotification() {
 		return this.notification;
 	}
+	
+	
 	@SuppressWarnings("unused")
 	public void handleFacebookSendButton() {
-		String idPost = getNotification().getIDPost();
+		//String idPost = getNotification().getIDPost();
 		closeWindow();
 	}
 	

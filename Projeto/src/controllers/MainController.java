@@ -51,6 +51,8 @@ public class MainController{
 
 	@FXML
 	private Button home_button ;
+	@FXML 
+	private Button refresh_button;
 	@FXML
 	public Button search_button;
 	@FXML
@@ -182,9 +184,13 @@ public class MainController{
 	 *  	3) criar e lançar as threads que fazem a busca dos posts
 	 *  	4) chama a função que escreve na interface as informações 
 	 */
-	public void handleHomeButton() throws InterruptedException, ClassNotFoundException, IOException {
+	public void handleRefreshButton() throws InterruptedException, ClassNotFoundException, IOException {
 		DistributorThread dist = new DistributorThread(this, this.oos);
 		dist.start();
+	}
+	
+	public void handleHomeButton() {
+		
 	}
 
 	/**
@@ -253,17 +259,24 @@ public class MainController{
 				e.printStackTrace();
 			}
 		} else if (notification.getPlatform().equals("TWITTER")) {
-			try {
-				Parent root= FXMLLoader.load(getClass().getResource("../FXMLFiles/twitter_reply.fxml"));
-				Scene scene = new Scene(root);
+				FXMLLoader Loader = new FXMLLoader();
+				Loader.setLocation(getClass().getResource("../FXMLFiles/twitter_reply.fxml"));
+				try {
+					Loader.load();
+				} catch (IOException e) {
+					Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, e);
+				}
+				
+				TwitterGuiController twitter_gui_controller = Loader.getController();
+				twitter_gui_controller.setNotificationFromGUI(notification);
+				twitter_gui_controller.setPostText(notification);
+			
+				Parent p = Loader.getRoot();
 				Stage stage = new Stage();
-				stage.setScene(scene);
+				stage.setScene(new Scene(p));
 				stage.setTitle("Twitter Reply");
 				stage.show();
-				
-			} catch(Exception e) {
-				e.printStackTrace();
-			}
+			
 		} else if (notification.getPlatform().equals("FACEBOOK")) {
 				FXMLLoader Loader = new FXMLLoader();
 				Loader.setLocation(getClass().getResource("../FXMLFiles/facebook_reply.fxml"));
@@ -331,7 +344,7 @@ public class MainController{
 	public void filter_list_by(ObservableList<Notification> list_to_filter, String word_to_search, int type) {
 		ObservableList<Notification> filtered_list = FXCollections.observableArrayList(); 
 		for(int i=0; i< list_to_filter.size(); i++) {
-			if(type==1 && list_to_filter.get(i).getMessage().contains(word_to_search) )
+			if(type==1 && list_to_filter.get(i).getMessage().toLowerCase().contains(word_to_search.toLowerCase()) )
 				filtered_list.add(list_to_filter.get(i));
 			else if (type==2 && list_to_filter.get(i).getAutor().contains(word_to_search))
 				filtered_list.add(list_to_filter.get(i));
@@ -369,7 +382,7 @@ public class MainController{
 		FXCollections.sort(list, new Comparator<Notification>() {
 			@Override
 			public int compare(Notification arg0, Notification arg1) {
-				return arg0.getDate().compareTo(arg1.getDate());
+				return arg1.getDate().compareTo(arg0.getDate());
 			}
 			});
 	}

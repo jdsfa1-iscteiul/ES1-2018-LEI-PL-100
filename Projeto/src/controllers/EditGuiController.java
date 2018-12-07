@@ -16,10 +16,15 @@ public class EditGuiController {
 	@FXML
 	public TextArea email_password_box;	
 	@FXML
-	public TextArea twitter_token_box;	
-	@FXML
 	public Button save_button;
-
+	@FXML
+	public TextArea consumerkey_box;
+	@FXML
+	public TextArea consumersecret_box;
+	@FXML
+	public TextArea acesstoken_box;
+	@FXML
+	public TextArea acesstokensecret_box;
 	
 	public void setOldDataOnBoxes() throws Exception {
 		MyXMLReader reader = new MyXMLReader();
@@ -28,14 +33,23 @@ public class EditGuiController {
 		this.facebook_token_box.setText(pi.getFacebookToken());
 		this.emai_box.setText(pi.getEmail());
 		this.email_password_box.setText(pi.getEmaiPassword());
-		this.twitter_token_box.setText(pi.getTwitterToken());
+		this.consumerkey_box.setText(pi.getConsumerkey());
+		this.consumersecret_box.setText(pi.getConsumersecret());
+		this.acesstoken_box.setText(pi.getAcesstoken());
+		this.acesstokensecret_box.setText(pi.getAcesstokensecret());
 		
 		
 	}
 	
 	public void handleSaveButton () {
 		MyXMLReader reader = new MyXMLReader();
-		PersonalInformation pi = new PersonalInformation(facebook_token_box.getText(), emai_box.getText(), email_password_box.getText(), twitter_token_box.getText());
+		PersonalInformation pi = new PersonalInformation(this.facebook_token_box.getText(),
+														this.emai_box.getText(), 
+														this.email_password_box.getText(),
+														this.consumerkey_box.getText(),
+														this.consumersecret_box.getText(),
+														this.acesstoken_box.getText(),
+														this.acesstokensecret_box.getText());
 		try {
 			reader.personalInfToXMLExample(pi);
 		} catch (Exception e) {

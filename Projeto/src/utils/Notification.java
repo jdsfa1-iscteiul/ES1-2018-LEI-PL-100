@@ -14,7 +14,7 @@ public class Notification implements Serializable {
 	private java.util.Date date;
 	private String message;
 	private String subject;
-	private String idPost;
+	private long idPost;
 	
 	public Notification(String platform, String autor, String subject, java.util.Date date, String message) {
 		super();
@@ -41,6 +41,15 @@ public class Notification implements Serializable {
 		this.date = date;
 		this.message = message;
 	}
+	
+	public Notification(String platform, String autor, java.util.Date date, String message, long idPost) {
+		super();
+		this.platform = platform;
+		this.autor = autor;
+		this.date = date;
+		this.message = message;
+		this.idPost = idPost;
+	}
 
 	public String getPlatform() {
 		return platform;
@@ -60,12 +69,13 @@ public class Notification implements Serializable {
 	public String getSubject() {
 		return subject;
 	}
-	public String getIDPost() {
-		return idPost;
+	public long getIDPost() {
+		return this.idPost;
 	}
-	public void setID(String idPost) {
-		this.idPost = idPost;
-	}
+	
+//	public void setID(String idPost) {
+//		this.idPost = idPost;
+//	}
 
 	@Override
 	public String toString() {

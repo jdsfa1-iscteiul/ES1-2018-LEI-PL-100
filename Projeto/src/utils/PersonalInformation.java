@@ -3,28 +3,40 @@ package utils;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.TextArea;
+
 @XmlRootElement(name = "PersonalInformation")
 public class PersonalInformation {
 	
 	private String facebookToken;
 	private String email;
 	private String emaiPassword;
-	private String twitterToken;
+	private String consumerkey;
+	private String consumersecret;
+	private String acesstoken;
+	private String acesstokensecret;
 	
 	
 	public PersonalInformation() {
 		this.facebookToken = null;
 		this.email = null;
 		this.emaiPassword = null;
-		this.twitterToken = null;
+		this.consumerkey = null;
+		this.consumersecret = null;
+		this.acesstoken = null;
+		this.acesstokensecret = null;
 	}
 	
-	public PersonalInformation(String facebookToken, String email, String emaiPassword, String twitterToken) {
+	public PersonalInformation(String facebookToken, String email, String emaiPassword, String consumerKey, String consumerSecret, String acesstoken, String acesstokensecret) {
 		super();
 		this.facebookToken = facebookToken;
 		this.email = email;
 		this.emaiPassword = emaiPassword;
-		this.twitterToken = twitterToken;
+		this.consumerkey = consumerKey;
+		this.consumersecret = consumerSecret;
+		this.acesstoken = acesstoken;
+		this.acesstokensecret = acesstokensecret;
 	}
 
 	public String getFacebookToken() {
@@ -54,14 +66,39 @@ public class PersonalInformation {
 		this.emaiPassword = emaiPassword;
 	}
 
-	public String getTwitterToken() {
-		return twitterToken;
+	public String getConsumerkey() {
+		return consumerkey;
 	}
-	
-	@XmlElement(name = "twitterToken")
-	public void setTwitterToken(String twitterToken) {
-		this.twitterToken = twitterToken;
+
+	public void setConsumerkey(String consumerkey) {
+		this.consumerkey = consumerkey;
 	}
+
+	public String getConsumersecret() {
+		return consumersecret;
+	}
+
+	public void setConsumersecret(String consumersecret) {
+		this.consumersecret = consumersecret;
+	}
+
+	public String getAcesstoken() {
+		return acesstoken;
+	}
+
+	public void setAcesstoken(String acesstoken) {
+		this.acesstoken = acesstoken;
+	}
+
+	public String getAcesstokensecret() {
+		return acesstokensecret;
+	}
+
+	public void setAcesstokensecret(String acesstokensecret) {
+		this.acesstokensecret = acesstokensecret;
+	}
+
+
 	
 	
 	

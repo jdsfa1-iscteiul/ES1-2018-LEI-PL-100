@@ -18,6 +18,7 @@ import javax.swing.JOptionPane;
 
 import javafx.scene.control.TextArea;
 import twitter4j.Status;
+import twitter4j.StatusUpdate;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 import twitter4j.conf.ConfigurationBuilder;
@@ -58,10 +59,19 @@ public class TwitterWorkingThread extends Thread {
 	}
 
 
+	public TwitterWorkingThread() {
+	}
+
+
 	/**
 	 * Método para ir buscar todos os posts no GRUPO ISCTE ao facebook do cliente
 	 */
 	public void start() {
+		receive();
+	}	
+
+
+	private void receive() {
 		ConfigurationBuilder cb = new ConfigurationBuilder();
 		cb.setDebugEnabled(false)
 		.setOAuthConsumerKey("l30rxNB7Mgp26PqEcT07dpVkX")
@@ -77,7 +87,7 @@ public class TwitterWorkingThread extends Thread {
 			status = twitter.getHomeTimeline();
 			for(Status stat: status) {
 				System.out.println("usuário: @" + stat.getUser().getScreenName() + " - " + stat.getText());
-				Notification notification = new Notification("TWITTER", stat.getSource(), stat.getCreatedAt(), stat.getText());
+				Notification notification = new Notification("TWITTER", stat.getUser().getScreenName(), stat.getCreatedAt(), stat.getText(), stat.getId());
 				synchronized(locker) {
 					this.oos.writeObject(notification);
 				}
@@ -86,10 +96,31 @@ public class TwitterWorkingThread extends Thread {
 		catch (TwitterException | IOException e) {
 			e.printStackTrace();
 		}
-
-
-
-
 	}
 
+	public void send_tweet(Notification tweet_to_reply, String answer) {
+		ConfigurationBuilder cb = new ConfigurationBuilder();
+		cb.setDebugEnabled(false)
+		.setOAuthConsumerKey("l30rxNB7Mgp26PqEcT07dpVkX")
+		.setOAuthConsumerSecret("ehX5YAR5mPoZ6Tn4X5xk8s0TPfQ4y9UTJ1A4KvzzCb1bn3RSzB")
+		.setOAuthAccessToken("1069679989111615491-DBWPNWnVWIpGyEn6ggfQLrCWffjvR9")
+		.setOAuthAccessTokenSecret("dvbl54FXg9HNY4uYqNH6zjRDgLLVK3Ac6OvwqtxtLJPDo");
+
+		TwitterFactory tf = new TwitterFactory(cb.build());
+		twitter4j.Twitter twitter = tf.getInstance();
+
+		StatusUpdate status_answer =  new StatusUpdate(answer);
+		status_answer.setInReplyToStatusId(tweet_to_reply.getIDPost());
+		System.out.println("send_tweet"+ tweet_to_reply.getIDPost());
+		try {
+			twitter.updateStatus(status_answer);
+			System.out.println("Done");
+		} catch (TwitterException e) {
+			e.printStackTrace();
+		}
+	}
+
+
+
 }
+
