@@ -92,7 +92,6 @@ public class MainController{
 		confirm_button.setDisable(true);
 
 		numCheckBoxesSelected.addListener((obs, oldSelectedCount, newSelectedCount) -> {
-			System.out.println((newSelectedCount.intValue()));
 			if (newSelectedCount.intValue() >= 1) {
 				selectedCheckBoxes.forEach(cb -> cb.setDisable(false));
 				confirm_button.setDisable(false);
@@ -149,8 +148,8 @@ public class MainController{
 		if(list.isEmpty()) {
 			notifications_text_area.setText("Nenhuma mensagem para filtrar");
 		}else {
-			System.out.println("entrei");
 			filter_list_by_plataform(list);
+			notifications_text_area.clear();
 		}
 	}
 
@@ -222,6 +221,7 @@ public class MainController{
 			sortList(list);
 			notifications_list.getItems().clear();
 			notifications_list.getItems().addAll(list);
+			notifications_text_area.clear();
 		}
 		else notifications_text_area.setText("Nenhuma mensagem na base de dados");
 	}
