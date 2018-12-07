@@ -28,11 +28,14 @@ public class DistributorThread extends Thread {
 			Object locker = new Object();
 			FacebookWorkingThread fbw = new FacebookWorkingThread(locker, this.oos);
 			EmailWorkingThread ewt = new EmailWorkingThread(locker, this.oos);
+			TwitterWorkingThread twt = new TwitterWorkingThread(locker, oos);
 			fbw.start();
 			ewt.start();
+			twt.start();
 			try {
 				//fbw.join();
-				ewt.join();	
+				ewt.join();
+				twt.join();
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

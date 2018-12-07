@@ -32,6 +32,15 @@ public class Notification implements Serializable {
 		this.date = date;
 		this.message = message;
 	}
+	
+	
+	public Notification(String platform, String autor, java.util.Date date, String message) {
+		super();
+		this.platform = platform;
+		this.autor = autor;
+		this.date = date;
+		this.message = message;
+	}
 
 	public String getPlatform() {
 		return platform;
