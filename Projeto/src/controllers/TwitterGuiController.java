@@ -1,4 +1,4 @@
-package Interface;
+package controllers;
 
 public class TwitterGuiController {
 

@@ -1,9 +1,13 @@
-package Interface;
+package controllers;
 
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import utils.Notification;
+import workingThreads.EmailWorkingThread;
 
 public class EmailGuiController {
 
@@ -13,6 +17,9 @@ public class EmailGuiController {
 	public TextField message_box;
 	@FXML
 	public TextField subject_box;
+	@FXML
+	public Button send_button;
+	
 	public Notification notification;
 
 	public void setNotificationFromGUI(Notification n) {
@@ -34,7 +41,13 @@ public class EmailGuiController {
 		if(!message_box.getText().isEmpty() && !getNotification().getSubject().isEmpty()) {
 			EmailWorkingThread sender_Thread = new EmailWorkingThread();
 			sender_Thread.send("projetoes1@outlook.pt", replying_email.getText(), subject_box.getText(), message_box.getText() );
+			closeWindow();
 		}
 		else System.out.println("tente enviar outra vez");
+	}
+	
+	public void closeWindow() {
+	    Stage stage = (Stage) send_button.getScene().getWindow();
+	    stage.close();
 	}
 }

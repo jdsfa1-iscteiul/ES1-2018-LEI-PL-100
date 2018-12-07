@@ -1,4 +1,4 @@
-package Interface;
+package controllers;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.IntegerBinding;
@@ -7,7 +7,6 @@ import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -15,39 +14,23 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 
-import java.awt.Checkbox;
-import java.io.BufferedReader;
 import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.URL;
-import java.sql.DatabaseMetaData;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.ResourceBundle;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import com.restfb.Connection;
-import com.restfb.DefaultFacebookClient;
-import com.restfb.FacebookClient;
-import com.restfb.types.Group;
-import com.restfb.types.Post;
-import com.restfb.types.User;
 
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import utils.Notification;
+import workingThreads.DistributorThread;
 
-public class Controller{
+public class MainController{
 
 	@FXML
 	private CheckBox twitter_checkbox ;
@@ -246,11 +229,11 @@ public class Controller{
 		else if (notification.getPlatform().equals("EMAIL")) {
 			try {
 				FXMLLoader Loader = new FXMLLoader();
-				Loader.setLocation(getClass().getResource("email_reply.fxml"));
+				Loader.setLocation(getClass().getResource("../FXMLFiles/email_reply.fxml"));
 				try {
 					Loader.load();
 				} catch (IOException e) {
-					Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, e);
+					Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, e);
 				}
 				
 				EmailGuiController email_gui_controller = Loader.getController();
@@ -268,7 +251,7 @@ public class Controller{
 			}
 		} else if (notification.getPlatform().equals("TWITTER")) {
 			try {
-				Parent root= FXMLLoader.load(getClass().getResource("twitter_reply.fxml"));
+				Parent root= FXMLLoader.load(getClass().getResource("../FXMLFiles/twitter_reply.fxml"));
 				Scene scene = new Scene(root);
 				Stage stage = new Stage();
 				stage.setScene(scene);
@@ -280,11 +263,11 @@ public class Controller{
 			}
 		} else if (notification.getPlatform().equals("FACEBOOK")) {
 				FXMLLoader Loader = new FXMLLoader();
-				Loader.setLocation(getClass().getResource("facebook_reply.fxml"));
+				Loader.setLocation(getClass().getResource("../FXMLFiles/facebook_reply.fxml"));
 				try {
 					Loader.load();
 				} catch (IOException e) {
-					Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, e);
+					Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, e);
 				}
 				
 				FacebookGuiController facebook_gui_controller = Loader.getController();
@@ -356,14 +339,18 @@ public class Controller{
 		notifications_list.getItems().addAll(filtered_list);
 	}
 	
-	public void handleEditButton() {
+	public void handleEditButton() throws Exception {
 		FXMLLoader Loader = new FXMLLoader();
-		Loader.setLocation(getClass().getResource("change_personal_information.fxml"));
+		Loader.setLocation(getClass().getResource("../FXMLFiles/change_personal_information.fxml"));
 		try {
 			Loader.load();
 		} catch (IOException e) {
-			Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, e);
+			Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, e);
 		}
+	
+		EditGuiController egc = Loader.getController();
+		egc.setOldDataOnBoxes();
+		
 		Parent p = Loader.getRoot();
 		Stage stage = new Stage();
 		stage.setScene(new Scene(p));

@@ -1,4 +1,4 @@
-package Interface;
+package workingThreads;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -7,15 +7,16 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import controllers.MainController;
 import javafx.application.Platform;
 
 public class DistributorThread extends Thread {
 		
-		private Controller controller;
+		private MainController controller;
 		private ObjectOutputStream oos;
 		private ObjectInputStream ois;
 		
-		public DistributorThread(Controller controller, ObjectOutputStream oos) {
+		public DistributorThread(MainController controller, ObjectOutputStream oos) {
 			super();
 			this.controller = controller;
 			this.oos = oos;

@@ -1,4 +1,4 @@
-package Interface;
+package workingThreads;
 
 import java.io.*;
 import java.sql.Date;
@@ -7,11 +7,15 @@ import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import utils.MyXMLReader;
+import utils.Notification;
+import utils.PersonalInformation;
+
 public class EmailWorkingThread extends Thread{
 	
 	private String host = "pop-mail.outlook.com";
-	private String user = "projetoes1@outlook.pt";
-	private String password = "Sportingcampeao";
+	private String user;
+	private String password;
 	private Object locker;
 	private ObjectOutputStream oos;
 	
@@ -23,6 +27,14 @@ public class EmailWorkingThread extends Thread{
 	}
 	
 	public void run() {
+		MyXMLReader reader = new MyXMLReader();
+		try {
+			PersonalInformation pi = reader.XMLtoPersonInf();
+			this.user = pi.getEmail();
+			this.password = pi.getEmaiPassword();		
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
 		receive();
 	}
 	public void send(String from, String dst, String subject, String text) {
@@ -32,6 +44,15 @@ public class EmailWorkingThread extends Thread{
 			props.put("mail.smtp.starttls.enable", "true");
 			props.put("mail.smtp.host", "smtp-mail.outlook.com");
 			props.put("mail.smtp.port", "587");
+			
+			MyXMLReader reader = new MyXMLReader();
+			try {
+				PersonalInformation pi = reader.XMLtoPersonInf();
+				this.user = pi.getEmail();
+				this.password = pi.getEmaiPassword();		
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
 		
 			Session session = Session.getInstance(props,
 			  new javax.mail.Authenticator() {
@@ -48,10 +69,7 @@ public class EmailWorkingThread extends Thread{
 					InternetAddress.parse(dst));
 				message.setSubject(subject);
 				message.setText(text);
-//				message.setSubject("Testing Subject");
-//				message.setText("Dear Mail Crawler,"
-//					+ "\n\n No spam to my email, please!");
-		
+
 				Transport.send(message);
 		
 				System.out.println("Done");

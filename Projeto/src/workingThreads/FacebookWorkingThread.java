@@ -1,4 +1,4 @@
-package Interface;
+package workingThreads;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -22,6 +22,9 @@ import com.restfb.types.Post;
 import com.restfb.types.User;
 
 import javafx.scene.control.TextArea;
+import utils.MyXMLReader;
+import utils.Notification;
+import utils.PersonalInformation;
 
 /**
  * Classe para lidar com os pedidos da plataforma Facebook
@@ -62,9 +65,17 @@ public class FacebookWorkingThread extends Thread {
 	 * Método para ir buscar todos os posts no GRUPO ISCTE ao facebook do cliente
 	 */
 	public void start() {
-		String at = "EAAFBpVUIgNIBAFCvP5salaEZA2SdtFPkLxJykkiyHHzLSQgZCk3cl3fG4AzerwjM1mY6bXcnxVzxfavR8KhaKYZCkZB5aMRyXgSMAnelct7v7wzAdGcjVbC1CLZC9ZA3eZCUPUXm4PIPBAeZCbpKgmhbsPBmJLYphPdpm7kKzm2Y5EEfVsnkBNuy";
+		MyXMLReader reader = new MyXMLReader();
+		String token = new String();
+		try {
+			PersonalInformation pi = reader.XMLtoPersonInf();
+			token = pi.getFacebookToken();
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+	
 		@SuppressWarnings("deprecation")
-		FacebookClient fb = new DefaultFacebookClient(at);
+		FacebookClient fb = new DefaultFacebookClient(token);
 
 		User me = fb.fetchObject("me", User.class);
 		System.out.println("Utilizador: \n" + me.getName() +"\n");

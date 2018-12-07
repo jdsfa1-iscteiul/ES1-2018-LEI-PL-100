@@ -1,4 +1,4 @@
-package Interface;
+package utils;
 
 import java.io.Serializable;
 import java.sql.Date;
@@ -54,7 +54,7 @@ public class Notification implements Serializable {
 	public String getIDPost() {
 		return idPost;
 	}
-	protected void setID(String idPost) {
+	public void setID(String idPost) {
 		this.idPost = idPost;
 	}
 

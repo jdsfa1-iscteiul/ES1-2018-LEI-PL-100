@@ -1,8 +1,10 @@
-package Interface;
+package controllers;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import utils.Notification;
 
 public class FacebookGuiController {
 
@@ -10,6 +12,9 @@ public class FacebookGuiController {
 	public TextArea post_box;
 	@FXML
 	public TextArea reply_box;
+	@FXML
+	public Button send_button;
+	
 	private Notification notification;
 
 	public void setNotificationFromGUI(Notification notification) {
@@ -19,6 +24,7 @@ public class FacebookGuiController {
 		post_box.setText(n.getMessage());
 	}
 
+	@SuppressWarnings("unused")
 	private String getBoxText() {
 		return reply_box.getText();
 	}
@@ -26,7 +32,14 @@ public class FacebookGuiController {
 	public Notification getNotification() {
 		return this.notification;
 	}
+	@SuppressWarnings("unused")
 	public void handleFacebookSendButton() {
 		String idPost = getNotification().getIDPost();
+		closeWindow();
+	}
+	
+	public void closeWindow() {
+	    Stage stage = (Stage) send_button.getScene().getWindow();
+	    stage.close();
 	}
 }
