@@ -16,6 +16,11 @@ public class FacebookGuiController {
 	public Button send_button;
 	
 	private Notification notification;
+	
+	/**
+	 * Dá acesso à notificação a ser respondida. 
+	 * @param n
+	 */
 
 	public void setNotificationFromGUI(Notification notification) {
 		this.notification = notification;

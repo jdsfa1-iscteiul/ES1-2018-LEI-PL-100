@@ -23,6 +23,11 @@ public class EmailGuiController {
 	public Button send_button;
 	
 	public Notification notification;
+	
+	/**
+	 * Dá acesso à notificação a ser respondida. 
+	 * @param n
+	 */
 
 	public void setNotificationFromGUI(Notification n) {
 		this.notification = n;
@@ -55,6 +60,10 @@ public class EmailGuiController {
 		}
 		else System.out.println("tente enviar outra vez");
 	}
+	
+	/**
+	 * Fecha a janela.
+	 */
 	
 	public void closeWindow() {
 	    Stage stage = (Stage) send_button.getScene().getWindow();

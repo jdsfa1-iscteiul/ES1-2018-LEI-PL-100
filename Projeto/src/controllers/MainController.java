@@ -174,11 +174,9 @@ public class MainController{
 
 
 	/**
-	 *  Função temporária que serve para:
-	 *  	1) chama as funçoes para abrir os canais de escrita/leitura na base de dados
-	 *  	2) criar o cadeado que permite a sincronização entre as threads
-	 *  	3) criar e lançar as threads que fazem a busca dos posts
-	 *  	4) chama a função que escreve na interface as informações 
+	 *  Função que faz o refresh das notificações.
+	 *  Lança a thread que por sua vez vai lançar as threads de procura.
+	 * 
 	 */
 	public void handleRefreshButton() throws InterruptedException, ClassNotFoundException, IOException {
 		try {
@@ -191,6 +189,11 @@ public class MainController{
 		dist.start();
 	}
 
+	/**
+	 * Atualiza a interface apenas com as notificações já existentes na base de dados.
+	 * 
+	 * 
+	 */
 	public void handleHomeButton() {
 		try {
 			writeDataOnGui();
@@ -200,8 +203,8 @@ public class MainController{
 	}
 
 	/**
-	 * 	1) Chama a função que lê da base de dados
-	 * 	2) Adiciona à interface a lista de notificações
+	 * 	Chama a função que lê da base de dados
+	 * 	Adiciona à interface a lista de notificações
 	 */
 	public void writeDataOnGui() throws IOException, ClassNotFoundException {
 		try {
@@ -230,7 +233,10 @@ public class MainController{
 		}
 	}
 
-	@FXML
+	/**
+	 * Quando o utilizador seleciona uma notificação, mostra no painel direito a sua mensagem.
+	 * @param event
+	 */
 	private void displaySelected(MouseEvent event) {
 		Notification notification = this.notifications_list.getSelectionModel().getSelectedItem();
 		if (notification==null) {

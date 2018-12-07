@@ -26,6 +26,11 @@ public class EditGuiController {
 	@FXML
 	public TextArea acesstokensecret_box;
 	
+	/**
+	 * Preenche a interface de alterar os dados com as informações já existendes na base de dados.
+	 * @throws Exception
+	 */
+	
 	public void setOldDataOnBoxes() throws Exception {
 		MyXMLReader reader = new MyXMLReader();
 		PersonalInformation pi = reader.XMLtoPersonInf();
@@ -40,6 +45,10 @@ public class EditGuiController {
 		
 		
 	}
+	
+	/**
+	 * Função chamada quando o utilizador clica no botão de gravar.
+	 */
 	
 	public void handleSaveButton () {
 		MyXMLReader reader = new MyXMLReader();
@@ -57,6 +66,10 @@ public class EditGuiController {
 		}
 		closeWindow();
 	}
+	
+	/**
+	 * Função para fechar a janela de edição de dados.
+	 */
 	
 	public void closeWindow() {
 	    Stage stage = (Stage) save_button.getScene().getWindow();
