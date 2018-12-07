@@ -1,4 +1,4 @@
-package utils;
+package Interface;
 
 import java.io.Serializable;
 import java.sql.Date;
@@ -14,7 +14,6 @@ public class Notification implements Serializable {
 	private java.util.Date date;
 	private String message;
 	private String subject;
-	private String idPost;
 	
 	public Notification(String platform, String autor, String subject, java.util.Date date, String message) {
 		super();
@@ -33,6 +32,11 @@ public class Notification implements Serializable {
 		this.message = message;
 	}
 
+//	public Notification(String platform, String message) {
+//		this.platform = platform;
+//		this.message = message;
+//	}	
+
 	public String getPlatform() {
 		return platform;
 	}
@@ -48,15 +52,6 @@ public class Notification implements Serializable {
 	public String getMessage() {
 		return message;
 	}
-	public String getSubject() {
-		return subject;
-	}
-	public String getIDPost() {
-		return idPost;
-	}
-	public void setID(String idPost) {
-		this.idPost = idPost;
-	}
 
 	@Override
 	public String toString() {
@@ -71,4 +66,7 @@ public class Notification implements Serializable {
 			return this.message;
 		}
 	}
+	
+	
+	
 }

@@ -20,8 +20,6 @@ import com.restfb.types.Group;
 import com.restfb.types.Post;
 import com.restfb.types.User;
 
-import workingThreads.FacebookWorkingThread;
-
 class FacebookWorkingThreadTest {
 	
 	private FacebookWorkingThread classUnderTest;
