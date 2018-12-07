@@ -1,4 +1,4 @@
-package Interface;
+package workingThreads;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -22,6 +22,7 @@ import com.restfb.types.Post;
 import com.restfb.types.User;
 
 import javafx.scene.control.TextArea;
+import utils.Notification;
 
 /**
  * Classe para lidar com os pedidos da plataforma Facebook

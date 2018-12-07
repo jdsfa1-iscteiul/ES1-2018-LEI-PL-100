@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<SplitPane dividerPositions="0.28595317725752506" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="686.0" prefWidth="1334.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainController">
+  <items>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="687.0" prefWidth="363.0">
+         <children>
+            <ImageView fitHeight="874.0" fitWidth="459.0" layoutX="-51.0" layoutY="-31.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="file:../Projeto/src/images/backgrounf.jpg" />
+               </image>
+            </ImageView>
+            <CheckBox fx:id="twitter_checkbox" layoutX="10.0" layoutY="199.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="101.0" text="Twitter" textFill="WHITE" />
+            <CheckBox fx:id="facebook_checkbox" layoutX="10.0" layoutY="236.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="117.0" text="Facebook" textFill="WHITE" />
+            <Button fx:id="home_button" layoutX="111.0" layoutY="99.0" mnemonicParsing="false" onAction="#handleHomeButton" prefHeight="32.0" prefWidth="117.0" text="Home" />
+            <ImageView fitHeight="158.0" fitWidth="250.0" layoutX="63.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="file:../Projeto/src/images/ISCTEIULNormasLogos-02.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="41.0" fitWidth="49.0" layoutX="80.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="file:../Projeto/src/images/logo.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="32.0" fitWidth="47.0" layoutX="110.0" layoutY="241.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="file:../Projeto/src/images/Facebook_Home_logo_old.svg.png" />
+               </image>
+            </ImageView>
+            <CheckBox fx:id="email_checkbox" layoutX="10.0" layoutY="283.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="101.0" text="E-mail" textFill="WHITE" />
+            <ImageView fitHeight="32.0" fitWidth="41.0" layoutX="84.0" layoutY="283.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+              	 <Image url="file:../Projeto/src/images/1200px-Microsoft_Office_Outlook_(2013–present).svg.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="text_box" layoutX="11.0" layoutY="456.0" />
+            <Label layoutX="14.0" layoutY="424.0" text="Search by:" textFill="WHITE">
+               <font>
+                  <Font name="Calibri" size="20.0" />
+               </font>
+            </Label>
+            <Button fx:id="search_by_word_button" layoutX="11.0" layoutY="497.0" mnemonicParsing="false" onAction="#handleSearchButtonByWord" prefHeight="31.0" prefWidth="161.0" text="Search by this word" />
+            <Label layoutX="14.0" layoutY="164.0" text="Filter by:" textFill="#fffefe">
+               <font>
+                  <Font name="Calibri" size="20.0" />
+               </font>
+            </Label>
+            <Button fx:id="confirm_button" layoutX="13.0" layoutY="327.0" mnemonicParsing="false" onAction="#handleConfirmButton" text="Confirm" />
+            <Button fx:id="search_button_by_sender" layoutX="11.0" layoutY="575.0" mnemonicParsing="false" onAction="#handleSearchButtonBySender" text="Search by this sender" />
+            <Label layoutX="81.0" layoutY="546.0" text="OR" textFill="WHITE" />
+         </children></AnchorPane>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="684.0" prefWidth="958.0">
+         <children>
+            <MenuBar prefHeight="32.0" prefWidth="947.0">
+              <menus>
+                <Menu fx:id="edit_button" mnemonicParsing="false" text="Edit personal information">
+                  <items>
+                    <MenuItem fx:id="edit_menu_option" mnemonicParsing="false" onAction="#handleEditButton" text="Edit" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+            <ListView fx:id="notifications_list" layoutY="32.0" onMouseClicked="#displaySelected" onSwipeRight="#displaySelected" onSwipeUp="#displaySelected" prefHeight="650.0" prefWidth="400.0" />
+            <Separator layoutX="401.0" layoutY="32.0" orientation="VERTICAL" prefHeight="650.0" prefWidth="20.0" />
+            <TextArea fx:id="notifications_text_area" editable="false" layoutX="409.0" layoutY="32.0" prefHeight="595.0" prefWidth="538.0" wrapText="true" />
+            <Button fx:id="reply_button" layoutX="587.0" layoutY="639.0" mnemonicParsing="false" onAction="#handleReplyButton" text="Reply to this notification" />
+         </children>
+      </AnchorPane>
+  </items>
+</SplitPane>

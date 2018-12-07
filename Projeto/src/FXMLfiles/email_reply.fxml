@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<TitledPane animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="464.0" prefWidth="669.0" text="Email Reply" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EmailGuiController">
+  <content>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+         <children>
+            <Button fx:id="send_button" layoutX="306.0" layoutY="387.0" mnemonicParsing="false" onAction="#handleEmailSendButton" text="Send" />
+            <TextField fx:id="message_box" layoutX="14.0" layoutY="233.0" prefHeight="143.0" prefWidth="566.0" />
+            <TextField fx:id="subject_box" layoutX="15.0" layoutY="170.0" prefHeight="31.0" prefWidth="563.0" />
+            <Label layoutX="14.0" layoutY="132.0" text="Subject">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="15.0" layoutY="201.0" text="Message">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <TextArea fx:id="replying_email" editable="false" layoutX="15.0" layoutY="75.0" prefHeight="30.0" prefWidth="563.0" promptText="Replying to:" wrapText="true" />
+            <ImageView fitHeight="44.0" fitWidth="50.0" layoutX="310.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                   <Image url="file:../Projeto/src/images/1200px-Microsoft_Office_Outlook_(2013–present).svg.png" />
+               </image>
+            </ImageView>
+         </children></AnchorPane>
+  </content>
+</TitledPane>

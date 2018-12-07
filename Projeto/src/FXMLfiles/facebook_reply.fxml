@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<TitledPane animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="458.0" prefWidth="646.0" text="Facebook Post Reply" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FacebookGuiController">
+  <content>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+         <children>
+            <Label layoutX="27.0" layoutY="38.0" text="Post">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <TextArea fx:id="post_box" editable="false" layoutX="27.0" layoutY="69.0" prefHeight="112.0" prefWidth="571.0" wrapText="true" />
+            <Label layoutX="29.0" layoutY="198.0" text="Reply">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="62.0" fitWidth="113.0" layoutX="291.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="file:../Projeto/src/images/Facebook_Home_logo_old.svg.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="send_button" layoutX="286.0" layoutY="381.0" mnemonicParsing="false" onAction="#handleFacebookSendButton" text="Send" />
+            <TextArea fx:id="reply_box" layoutX="27.0" layoutY="231.0" prefHeight="142.0" prefWidth="569.0" />
+         </children></AnchorPane>
+  </content>
+</TitledPane>
