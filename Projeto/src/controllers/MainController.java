@@ -17,6 +17,7 @@ import javafx.scene.control.TextArea;
 import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -190,7 +191,39 @@ public class MainController{
 	}
 	
 	public void handleHomeButton() {
-		
+		ObservableList<Notification> list_aux = FXCollections.observableArrayList();
+		try{
+			ObjectInputStream in = new ObjectInputStream(new FileInputStream(".\\database.ser"));
+			int count = 0;
+			try {
+				while (true) {
+					count++;
+					try {
+						Notification obj = (Notification) in.readObject();
+						list_aux.add(obj);
+					} catch (ClassNotFoundException e) {
+						System.out.println("Can't read obj #" + count + ": " + e);
+					}
+				}
+			} 
+			catch (EOFException e) {
+				// no more objects to read
+			}
+			catch (IOException e) {}
+			finally {
+				in.close();
+			}
+		}
+		catch (FileNotFoundException e) {System.out.println("File not Found");}
+		catch (IOException e) {System.out.println("Input out of bounds");}
+		list.clear();
+		list.addAll(list_aux);
+		if(!list.isEmpty()) {
+			sortList(list);
+			notifications_list.getItems().clear();
+			notifications_list.getItems().addAll(list);
+		}
+		else notifications_text_area.setText("Nenhuma mensagem na base de dados");
 	}
 
 	/**
