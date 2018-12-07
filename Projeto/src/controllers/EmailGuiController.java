@@ -6,7 +6,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import utils.MyXMLReader;
 import utils.Notification;
+import utils.PersonalInformation;
 import workingThreads.EmailWorkingThread;
 
 public class EmailGuiController {
@@ -34,13 +36,21 @@ public class EmailGuiController {
 	
 	/**
 	 * Acionado pelo botão de enviar email
-	 * Gera uma thread que irá enviar o email criado para o autor da mensagem selecionada
 	 * Verifica se os campos de mensagem e de assunto não estão vazios
+	 * Gera uma thread que irá enviar o email criado para o autor da mensagem selecionada
 	 */
 	public void handleEmailSendButton() {
 		if(!message_box.getText().isEmpty() && !getNotification().getSubject().isEmpty()) {
 			EmailWorkingThread sender_Thread = new EmailWorkingThread();
-			sender_Thread.send("projetoes1@outlook.pt", replying_email.getText(), subject_box.getText(), message_box.getText() );
+			MyXMLReader reader = new MyXMLReader();
+			try {
+				PersonalInformation pi = reader.XMLtoPersonInf();
+				String email_sender = pi.getEmail();
+				System.out.println(email_sender);
+				sender_Thread.send(email_sender, replying_email.getText(), subject_box.getText(), message_box.getText() );
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
 			closeWindow();
 		}
 		else System.out.println("tente enviar outra vez");

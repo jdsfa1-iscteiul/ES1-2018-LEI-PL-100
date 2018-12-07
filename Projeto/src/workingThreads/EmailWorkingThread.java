@@ -92,7 +92,7 @@ public class EmailWorkingThread extends Thread{
 		  
 		      //create the POP3 store object and connect with the pop server
 		      Store store = emailSession.getStore("pop3s");
-
+		     
 		      store.connect(host, user, password);
 
 		      //create the folder object and open it
