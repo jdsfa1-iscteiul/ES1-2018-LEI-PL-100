@@ -1,63 +1,83 @@
 package tests;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-class MainControllerTest {
+public class MainControllerTest {
+	
+	private MainControllerTest dummyMainControllerTest;
+
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
+	}
+
+	
+
+	@Before
+	public void setUp() throws Exception {
+		dummyMainControllerTest = new MainControllerTest();
+	}
 
 	@Test
-	void testInitialize() {
+	public void testInitialize() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	void testHandleConfirmButton() {
+	public void testHandleConfirmButton() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	void testFilter_list_by_plataform() {
+	public void testFilter_list_by_plataform() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	void testHandleHomeButton() {
+	public void testHandleRefreshButton() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	void testWriteDataOnGui() {
+	public void testHandleHomeButton() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	void testHandleReplyButton() {
+	public void testWriteDataOnGui() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	void testHandleSearchButtonByWord() {
+	public void testHandleReplyButton() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	void testHandleSearchButtonBySender() {
+	public void testHandleSearchButtonByWord() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	void testFilter_list_by() {
+	public void testHandleSearchButtonBySender() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	void testHandleEditButton() {
+	public void testFilter_list_by() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	void testSortList() {
+	public void testHandleEditButton() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testSortList() {
 		fail("Not yet implemented");
 	}
 
