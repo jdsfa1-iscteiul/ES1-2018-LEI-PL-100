@@ -3,17 +3,18 @@ ES1-2018-LEI-PL-100
 
 **Membros do grupo**
 
-	João Figueira nº 78308
+	JoÃ£o Figueira nÂº 78308
 	 
-	Marco Domingues nº 78726
+	Marco Domingues nÂº 78726
 	
-	Rúben Agostinho nº 78123
+	RÃºben Agostinho nÂº 78123
 	
-	Tiago Santos nº 77879
+	Tiago Santos nÂº 77879
 
-**Link do youtube da apresentacao do projeto**
+**Link do youtube da apresentacao do projeto **
 
-[https://www.youtube.com/watch?v=dQw4w9WgXcQ][example]
+[https://www.youtube.com/][example]
 
-[example]: https://www.youtube.com/watch?v=dQw4w9WgXcQ
+[example]: https://www.youtube.com/
 
+A entregar em breve
