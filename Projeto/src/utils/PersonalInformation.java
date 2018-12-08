@@ -3,8 +3,6 @@ package utils;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.TextArea;
 
 @XmlRootElement(name = "PersonalInformation")
 public class PersonalInformation {

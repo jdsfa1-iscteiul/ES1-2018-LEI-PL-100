@@ -1,7 +1,6 @@
 package utils;
 
 import java.io.Serializable;
-import java.sql.Date;
 
 public class Notification implements Serializable {
 	/**
@@ -73,10 +72,6 @@ public class Notification implements Serializable {
 		return this.idPost;
 	}
 	
-//	public void setID(String idPost) {
-//		this.idPost = idPost;
-//	}
-
 	@Override
 	public String toString() {
 		switch(this.platform) {

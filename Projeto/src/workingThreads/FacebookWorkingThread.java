@@ -1,17 +1,7 @@
 package workingThreads;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import com.restfb.Connection;
@@ -19,10 +9,10 @@ import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
 import com.restfb.types.Group;
 import com.restfb.types.Post;
-import com.restfb.types.User;
 
-import javafx.scene.control.TextArea;
+import utils.MyXMLReader;
 import utils.Notification;
+import utils.PersonalInformation;
 
 /**
  * Classe para lidar com os pedidos da plataforma Facebook
@@ -46,6 +36,8 @@ public class FacebookWorkingThread extends Thread {
 	 * Canal de output
 	 */
 	private ObjectOutputStream oos;
+	
+	private String token;
 
 	
 	/**
@@ -63,12 +55,17 @@ public class FacebookWorkingThread extends Thread {
 	 * Método para ir buscar todos os posts no GRUPO ISCTE ao facebook do cliente
 	 */
 	public void start() {
-		String at = "EAAFBpVUIgNIBAFCvP5salaEZA2SdtFPkLxJykkiyHHzLSQgZCk3cl3fG4AzerwjM1mY6bXcnxVzxfavR8KhaKYZCkZB5aMRyXgSMAnelct7v7wzAdGcjVbC1CLZC9ZA3eZCUPUXm4PIPBAeZCbpKgmhbsPBmJLYphPdpm7kKzm2Y5EEfVsnkBNuy";
+		
+		MyXMLReader reader = new MyXMLReader();
+		try {
+			PersonalInformation pi = reader.XMLtoPersonInf();
+			this.token = pi.getFacebookToken();
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+		
 		@SuppressWarnings("deprecation")
-		FacebookClient fb = new DefaultFacebookClient(at);
-
-		User me = fb.fetchObject("me", User.class);
-		System.out.println("Utilizador: \n" + me.getName() +"\n");
+		FacebookClient fb = new DefaultFacebookClient(this.token);
 
 		Connection<Group> groups = fb.fetchConnection("me/groups", Group.class);
 
@@ -76,8 +73,6 @@ public class FacebookWorkingThread extends Thread {
 			for(Group g: groupPages) {
 				if (g.getName().equals("LEI PL ES1")) {
 					idGrupoIscte = g.getId();
-					System.out.println("Grupo: " + g.getName() + "\n");
-
 				}
 			}
 		}
@@ -95,7 +90,6 @@ public class FacebookWorkingThread extends Thread {
 						} catch (IOException e) {
 
 						}
-						System.out.println(post.getMessage());
 					}
 				}	
 			}

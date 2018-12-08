@@ -1,7 +1,6 @@
 package workingThreads;
 
 import java.io.*;
-import java.sql.Date;
 import java.util.Properties;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -110,13 +109,6 @@ public class EmailWorkingThread extends Thread{
 		         synchronized(locker) {
 		        	 this.oos.writeObject(notification);
 		         }
-		         
-		         System.out.println("---------------------------------");
-		         System.out.println("Email Number " + (i + 1));
-		         System.out.println("Subject: " + message.getSubject());
-		         System.out.println("From: " + message.getFrom()[0]);
-		         System.out.println("Text: " + message.getContent().toString());
-
 		      }
 
 		      //close the store and folder objects

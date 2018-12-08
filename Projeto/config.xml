@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <PersonalInformation>
-    <emailPassword>Sportingcampeao</emailPassword>
+    <acesstoken>1069679989111615491-DBWPNWnVWIpGyEn6ggfQLrCWffjvR9</acesstoken>
+    <acesstokensecret>dvbl54FXg9HNY4uYqNH6zjRDgLLVK3Ac6OvwqtxtLJPDo</acesstokensecret>
+    <consumerkey>l30rxNB7Mgp26PqEcT07dpVkX</consumerkey>
+    <consumersecret>ehX5YAR5mPoZ6Tn4X5xk8s0TPfQ4y9UTJ1A4KvzzCb1bn3RSzB</consumersecret>
+    <emailPassword>Engenhariasoftware</emailPassword>
     <email>projetoes1@outlook.pt</email>
     <facebookToken>EAAFBpVUIgNIBAFCvP5salaEZA2SdtFPkLxJykkiyHHzLSQgZCk3cl3fG4AzerwjM1mY6bXcnxVzxfavR8KhaKYZCkZB5aMRyXgSMAnelct7v7wzAdGcjVbC1CLZC9ZA3eZCUPUXm4PIPBAeZCbpKgmhbsPBmJLYphPdpm7kKzm2Y5EEfVsnkBNuy</facebookToken>
-    <twitterToken>nenhum</twitterToken>
 </PersonalInformation>

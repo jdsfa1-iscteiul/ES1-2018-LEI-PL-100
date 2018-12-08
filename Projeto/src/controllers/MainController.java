@@ -15,9 +15,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 
 import java.io.EOFException;
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -179,6 +177,7 @@ public class MainController{
 	 * 
 	 */
 	public void handleRefreshButton() throws InterruptedException, ClassNotFoundException, IOException {
+		this.notifications_text_area.setText("Loading...");
 		try {
 			openOStream();
 		} catch (IOException e) {
@@ -217,6 +216,7 @@ public class MainController{
 		sortList(list);
 		notifications_list.getItems().clear();
 		notifications_list.getItems().addAll(list);
+		this.notifications_text_area.clear();
 	}
 
 	/**
@@ -233,10 +233,7 @@ public class MainController{
 		}
 	}
 
-	/**
-	 * Quando o utilizador seleciona uma notificação, mostra no painel direito a sua mensagem.
-	 * @param event
-	 */
+	@FXML
 	private void displaySelected(MouseEvent event) {
 		Notification notification = this.notifications_list.getSelectionModel().getSelectedItem();
 		if (notification==null) {
