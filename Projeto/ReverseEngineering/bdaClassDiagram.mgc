@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ClassDiagram>
+    <Class name="workingThreads.EmailWorkingThread" x="816" y="355">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Communication destinationClassName="utils.MyXMLReader"/>
+        <Communication destinationClassName="utils.PersonalInformation"/>
+    </Class>
+    <Class name="controllers.TwitterGuiController" x="553" y="41">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Association destinationClassName="utils.Notification"
+            endpointName="notification" kind="Simple"/>
+        <Communication destinationClassName="workingThreads.TwitterWorkingThread"/>
+    </Class>
+    <Class name="utils.MyXMLReader" x="91" y="47">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class name="controllers.EmailGuiController" x="587" y="384">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Association destinationClassName="utils.Notification"
+            endpointName="notification" kind="Simple"/>
+        <Communication destinationClassName="workingThreads.EmailWorkingThread"/>
+        <Communication destinationClassName="utils.MyXMLReader"/>
+        <Communication destinationClassName="utils.PersonalInformation"/>
+    </Class>
+    <Class name="controllers.FacebookGuiController" x="588" y="227">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Association destinationClassName="utils.Notification"
+            endpointName="notification" kind="Simple"/>
+    </Class>
+    <Class name="main.Main" x="1166" y="83">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class name="workingThreads.TwitterWorkingThread" x="795" y="31">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Communication destinationClassName="utils.MyXMLReader"/>
+        <Communication destinationClassName="utils.PersonalInformation"/>
+    </Class>
+    <Class name="workingThreads.FacebookWorkingThread" x="845" y="216">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Communication destinationClassName="utils.MyXMLReader"/>
+        <Communication destinationClassName="utils.PersonalInformation"/>
+    </Class>
+    <Class name="controllers.MainController" x="1068" y="191">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Communication destinationClassName="controllers.TwitterGuiController"/>
+        <Communication destinationClassName="controllers.EmailGuiController"/>
+        <Communication destinationClassName="controllers.FacebookGuiController"/>
+        <Communication destinationClassName="controllers.EditGuiController"/>
+    </Class>
+    <Class name="tests.NotificationTest" x="95" y="313">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Association destinationClassName="utils.Notification"
+            endpointName="notificationFacebook" kind="Simple">
+            <Point x="292" y="342"/>
+        </Association>
+        <Association destinationClassName="utils.Notification"
+            endpointName="notificationTwitter" kind="Simple">
+            <Point x="359" y="276"/>
+        </Association>
+        <Association destinationClassName="utils.Notification"
+            endpointName="notificationNoPlatform" kind="Simple">
+            <Point x="206" y="394"/>
+            <Point x="304" y="400"/>
+            <Point x="354" y="402"/>
+        </Association>
+        <Association destinationClassName="utils.Notification"
+            endpointName="notificationEmail" kind="Simple">
+            <Point x="353" y="314"/>
+        </Association>
+    </Class>
+    <Class name="utils.Notification" x="406" y="288">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class name="workingThreads.DistributorThread" x="1155" y="697">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Association destinationClassName="controllers.MainController"
+            endpointName="controller" kind="Simple"/>
+        <Communication destinationClassName="workingThreads.TwitterWorkingThread"/>
+        <Communication destinationClassName="workingThreads.FacebookWorkingThread"/>
+    </Class>
+    <Class name="tests.MainControllerTest" x="56" y="517">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Association destinationClassName="tests.MainControllerTest"
+            endpointName="dummyMainControllerTest" kind="Simple"/>
+    </Class>
+    <Class name="controllers.EditGuiController" x="590" y="551">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Communication destinationClassName="utils.MyXMLReader"/>
+    </Class>
+    <Class name="utils.PersonalInformation" x="91" y="128">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+</ClassDiagram>

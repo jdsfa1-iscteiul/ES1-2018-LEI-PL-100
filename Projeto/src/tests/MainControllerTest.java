@@ -8,6 +8,7 @@ import org.junit.Test;
 
 public class MainControllerTest {
 	
+	@SuppressWarnings("unused")
 	private MainControllerTest dummyMainControllerTest;
 
 	@BeforeClass
@@ -18,7 +19,7 @@ public class MainControllerTest {
 
 	@Before
 	public void setUp() throws Exception {
-		dummyMainControllerTest = new MainControllerTest();
+		this.dummyMainControllerTest = new MainControllerTest();
 	}
 
 	@Test
