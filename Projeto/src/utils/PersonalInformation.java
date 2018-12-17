@@ -96,10 +96,5 @@ public class PersonalInformation {
 		this.acesstokensecret = acesstokensecret;
 	}
 
-
-	
-	
-	
-
 }
 

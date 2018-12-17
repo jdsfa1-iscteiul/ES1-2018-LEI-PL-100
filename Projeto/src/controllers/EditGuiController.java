@@ -12,7 +12,7 @@ public class EditGuiController {
 	@FXML
 	public TextArea facebook_token_box;	
 	@FXML
-	public TextArea emai_box;	
+	public TextArea email_box;	
 	@FXML
 	public TextArea email_password_box;	
 	@FXML
@@ -36,7 +36,7 @@ public class EditGuiController {
 		PersonalInformation pi = reader.XMLtoPersonInf();
 		
 		this.facebook_token_box.setText(pi.getFacebookToken());
-		this.emai_box.setText(pi.getEmail());
+		this.email_box.setText(pi.getEmail());
 		this.email_password_box.setText(pi.getEmaiPassword());
 		this.consumerkey_box.setText(pi.getConsumerkey());
 		this.consumersecret_box.setText(pi.getConsumersecret());
@@ -53,7 +53,7 @@ public class EditGuiController {
 	public void handleSaveButton () {
 		MyXMLReader reader = new MyXMLReader();
 		PersonalInformation pi = new PersonalInformation(this.facebook_token_box.getText(),
-														this.emai_box.getText(), 
+														this.email_box.getText(), 
 														this.email_password_box.getText(),
 														this.consumerkey_box.getText(),
 														this.consumersecret_box.getText(),

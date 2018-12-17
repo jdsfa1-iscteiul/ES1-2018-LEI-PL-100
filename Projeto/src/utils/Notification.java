@@ -76,11 +76,11 @@ public class Notification implements Serializable {
 	public String toString() {
 		switch(this.platform) {
 		case "FACEBOOK":
-			return "facebook: "+this.message;
+			return "facebook: " + this.message;
 		case "EMAIL":
-			return "email: " +this.subject;
+			return "email: " + this.subject;
 		case "TWITTER":
-			return "twitter: "+this.message;
+			return "twitter: " + this.message;
 		default:
 			return this.message;
 		}

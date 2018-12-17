@@ -35,6 +35,10 @@ public class TwitterGuiController {
 			
 	}
 	
+	public Notification getNotification() {
+		return notification;
+	}
+	
 	public void closeWindow() {
 	    Stage stage = (Stage) send_button.getScene().getWindow();
 	    stage.close();

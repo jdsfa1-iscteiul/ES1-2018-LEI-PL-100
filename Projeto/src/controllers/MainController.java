@@ -84,7 +84,8 @@ public class MainController{
 		configureCheckBox(facebook_checkbox);
 		configureCheckBox(email_checkbox);
 
-		confirm_button.setDisable(true);
+		if(confirm_button != null)
+			confirm_button.setDisable(true);
 
 		numCheckBoxesSelected.addListener((obs, oldSelectedCount, newSelectedCount) -> {
 			if (newSelectedCount.intValue() >= 1) {
@@ -117,22 +118,24 @@ public class MainController{
 	 * Método para configurar as checkboxs
 	 */
 	private void configureCheckBox(CheckBox checkBox) {
+		if(checkBox != null) {
 
-		if (checkBox.isSelected()) {
-			selectedCheckBoxes.add(checkBox);
-		} else {
-			unselectedCheckBoxes.add(checkBox);
-		}
-
-		checkBox.selectedProperty().addListener((obs, wasSelected, isNowSelected) -> {
-			if (isNowSelected) {
-				unselectedCheckBoxes.remove(checkBox);
+			if (checkBox.isSelected()) {
 				selectedCheckBoxes.add(checkBox);
 			} else {
-				selectedCheckBoxes.remove(checkBox);
 				unselectedCheckBoxes.add(checkBox);
 			}
-		});
+
+			checkBox.selectedProperty().addListener((obs, wasSelected, isNowSelected) -> {
+				if (isNowSelected) {
+					unselectedCheckBoxes.remove(checkBox);
+					selectedCheckBoxes.add(checkBox);
+				} else {
+					selectedCheckBoxes.remove(checkBox);
+					unselectedCheckBoxes.add(checkBox);
+				}
+			});
+		}
 	}
 
 	/**
@@ -214,9 +217,11 @@ public class MainController{
 		}
 		loadNotifications();
 		sortList(list);
-		notifications_list.getItems().clear();
-		notifications_list.getItems().addAll(list);
-		this.notifications_text_area.clear();
+		if(notifications_list != null) {
+			notifications_list.getItems().clear();
+			notifications_list.getItems().addAll(list);
+			this.notifications_text_area.clear();
+		}
 	}
 
 	/**
