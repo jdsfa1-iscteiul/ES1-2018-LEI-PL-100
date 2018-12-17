@@ -25,6 +25,10 @@ public class TwitterGuiController {
 		this.tweet_box.setText(n.getMessage());
 	}	
 	
+	public Notification getNotification() {
+		return this.notification;
+	}
+	
 	public void handleSendButton() {
 		String answer = this.reply_box.getText();
 		TwitterWorkingThread twt = new TwitterWorkingThread();
