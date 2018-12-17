@@ -17,3 +17,5 @@ ES1-2018-LEI-PL-100
 
 [example]: https://www.youtube.com/watch?v=dTRqaXwDwlk&fbclid=IwAR0iayq7DyEupgfAcrjmh3BzejBunzY-8CrL0Cad4b7nJPaZBwh-hiIn9vY
 
+
+Para correr a app no eclipse é necessário o plug-in e(fx)clipse instalado.
